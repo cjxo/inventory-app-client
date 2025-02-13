@@ -1,0 +1,46 @@
+.navbar {
+  padding: 16px; 
+  background-color: #9dc57d;
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  a {
+    color: #465d3f;
+    &:hover {
+      color: #293827;
+    }
+  }
+
+  .leftSide {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      h1 {
+        color: #293827;
+        font-weight: 500;
+      }
+    }
+
+    ul {
+      display: flex;
+      gap: 16px; 
+    }
+  }
+
+  .rightSide {
+    input {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 6px;
+    }
+  }
+}
