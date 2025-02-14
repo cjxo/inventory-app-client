@@ -1,5 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  src: url("./src/assets/fonts/Exo_2/Exo2-VariableFont_wght.ttf");
+  font-family: "exo2";
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "exo2";
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,6 +23,10 @@ body {
 
   display: flex;
   flex-direction: column;
+}
+
+input, button, textarea {
+  font-family: "exo2";
 }
 
 button {

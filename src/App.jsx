@@ -1,11 +1,13 @@
 import { Outlet } from "react-router-dom";
-import TopBar from "./components/TopBar";
+import TopBarWide from "./components/TopBarWide";
+import TopBarNarrow from "./components/TopBarNarrow";
 import Footer from "./components/Footer";
 
 const App = () => {
   return (
     <>
-      <TopBar />
+      <TopBarWide />
+      <TopBarNarrow />
       <main>
         <Outlet />
       </main>
