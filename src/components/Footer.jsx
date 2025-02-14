@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="common-container">
-      Footer
+      © 2025 cjloveskittens. All rights reserved.
     </footer>
   );
 };

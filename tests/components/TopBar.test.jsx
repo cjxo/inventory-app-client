@@ -68,4 +68,9 @@ describe("TopBarWide Component Testing", () => {
     const titleH1 = screen.getByRole("heading", { name: "LootBox" });
     expect(titleH1).toBeInTheDocument();
   });
+
+  test("does not render drop-down button-img", () => {
+    expect(screen.queryByRole("button", { name: "drop down links" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("img", { name: "drop down links" })).not.toBeInTheDocument();
+  });
 });

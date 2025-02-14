@@ -1,6 +1,6 @@
 .topBarNarrow {
   padding: 16px; 
-  background-color: #9dc57d;
+  background-color: var(--green-colour2);
 
   .wrapper {
     display: flex;
@@ -10,9 +10,9 @@
   }
 
   a {
-    color: #465d3f;
+    color: var(--green-colour0);
     &:hover {
-      color: #293827;
+      color: var(--green-colour1);
     }
   }
 
@@ -63,13 +63,13 @@
 
 .siteLinks {
   a.active {
-    color: #293827;
+    color: var(--green-colour1);
   }
 }
 
 .topBarWide {
   padding: 16px; 
-  background-color: #9dc57d;
+  background-color: var(--green-colour2);
   display: none;
 
   .wrapper {
@@ -79,9 +79,9 @@
   }
 
   a {
-    color: #465d3f;
+    color: var(--green-colour0);
     &:hover {
-      color: #293827;
+      color: var(--green-colour1);
     }
   }
 
@@ -95,7 +95,7 @@
       align-items: center;
       gap: 8px;
       h1 {
-        color: #293827;
+        color: var(--green-colour1);
         font-weight: 500;
       }
     }
@@ -116,5 +116,26 @@
 
   @media (min-width: 768px) {
     display: block;
+  }
+}
+
+footer {
+  padding: 16px;
+  text-align: center;
+}
+
+.scrollableItemsWrapper {
+  h2 {
+    font-weight: 600;
+  }
+
+  .scroller {
+    display: flex;
+    overflow-x: scroll;
+
+    .card {
+      flex-basis: 500px;
+      flex-grow: 1;
+    }
   }
 }

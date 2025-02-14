@@ -7,8 +7,17 @@
   font-family: "exo2";
 }
 
+@font-face {
+  src: url("./src/assets/fonts/Exo_2/Exo2-Italic-VariableFont_wght.ttf");
+  font-family: "exo2it";
+}
+
 :root {
   font-family: "exo2";
+
+  --green-colour0: #465d3f;
+  --green-colour1: #293827; 
+  --green-colour2: #9dc57d;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

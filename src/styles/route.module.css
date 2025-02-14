@@ -1,1 +1,48 @@
+.homePage {
+  padding: 16px;
+  .homePageIntro {
+    max-width: 500px;
+    margin: 0 auto;
+    h1 {
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--green-colour1);
+      text-align: center;
+      em {
+        font-family: "exo2it";
+      }
 
+      @media (min-width: 1024px) {
+        font-size: 36px;
+      }
+    }
+
+    p {
+      line-height: 1.5;
+      font-size: 18px;
+      color: var(--green-colour0);
+
+      @media (min-width: 1024px) {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .linkButtons {
+    margin-top: 16px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    a {
+      padding: 14px 20px;
+      border-radius: 8px;
+      color: var(--green-colour1);
+      background-color: var(--green-colour2);
+      
+      @media (min-width: 1024px) {
+        font-size: 18px;
+      }
+    }
+  }
+}

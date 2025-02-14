@@ -1,7 +1,22 @@
+import { Link } from "react-router-dom";
+
+import ScrollableItems from "../components/ScrollableItems";
+import styles from "../styles/route.module.css";
+
 const HomePage = () => {
   return (
-    <div className="common-container">
-      HomePage
+    <div className={`common-container ${styles.homePage}`}>
+      <div className={styles.homePageIntro}>
+        <h1>Welcome to <em>LootBox</em>, an inventory management app for video game items</h1>
+        <p>Easily organize, track, and manage your virtual loot with ease.</p>
+      </div>
+  
+      <div className={styles.linkButtons}>
+        <Link to="/items">See Items</Link>
+        <Link to="/categories">See Categories</Link>
+      </div>
+
+      <ScrollableItems /> 
     </div>
   );
 };
