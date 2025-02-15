@@ -5,9 +5,9 @@ import styles from "../styles/route.module.css";
 
 const HomePage = () => {
   return (
-    <div className={`common-container ${styles.homePage}`}>
+    <div className={styles.homePage}>
       <div className={styles.homePageIntro}>
-        <h1>Welcome to <em>LootBox</em>, an inventory management app for video game items</h1>
+        <h1 className="title">Welcome to <em>LootBox</em>, an inventory management app for video game items</h1>
         <p>Easily organize, track, and manage your virtual loot with ease.</p>
       </div>
   

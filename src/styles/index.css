@@ -16,8 +16,9 @@
   font-family: "exo2";
 
   --green-colour0: #465d3f;
-  --green-colour1: #293827; 
+  --green-colour1: #293827;
   --green-colour2: #9dc57d;
+  --green-colour3: #cfdab5;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -67,4 +68,18 @@ ul {
 .common-container {
   max-width: 1400px;
   margin: 0 auto;
+
+  .title {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--green-colour1);
+    em {
+      font-family: "exo2it";
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 36px;
+    }
+  }
 }

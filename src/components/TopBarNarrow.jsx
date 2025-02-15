@@ -5,6 +5,7 @@ import styles from "../styles/component.module.css";
 import PixelArtCanvas from "./PixelArtCanvas";
 import SearchBar from "./SearchBar";
 import SiteLinks from "./SiteLinks";
+import ButtonImage from "./ButtonImage";
 
 const TopBarNarrow = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
@@ -16,15 +17,14 @@ const TopBarNarrow = () => {
     <nav className={styles.topBarNarrow}>
       <div className={`${styles.wrapper} common-container`}>
         <div className={styles.leftSide}>
-          <button
+          <ButtonImage
+            src="./src/assets/svgrepo/menu-svgrepo-com.svg"
+            alt="drop down links"
+            width={24}
+            height={24}
             className={styles.dropDownButton}
             onClick={() => setOpenDropDown(!openDropDown)}
-          >
-            <img
-              src="./src/assets/svgrepo/menu-svgrepo-com.svg"
-              alt="drop down links"
-            />
-          </button>
+          />
           <Link to="/" className={styles.logo}>
             <PixelArtCanvas
               src="./src/assets/textures/LootBoxLogo.png"

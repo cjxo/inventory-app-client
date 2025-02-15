@@ -1,21 +1,14 @@
-.homePage {
+main {
   padding: 16px;
+}
+
+.homePage {
   .homePageIntro {
     max-width: 500px;
     margin: 0 auto;
-    h1 {
-      font-size: 26px;
-      font-weight: 600;
-      margin-bottom: 16px;
-      color: var(--green-colour1);
-      text-align: center;
-      em {
-        font-family: "exo2it";
-      }
 
-      @media (min-width: 1024px) {
-        font-size: 36px;
-      }
+    h1 {
+      text-align: center;
     }
 
     p {
@@ -43,6 +36,45 @@
       @media (min-width: 1024px) {
         font-size: 18px;
       }
+    }
+  }
+}
+
+.itemPage {
+  .mainDisplay {
+    position: relative;
+    .sortBar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 16px;
+      color: var(--green-colour1);
+      background-color: var(--green-colour3);
+
+      p.filterP {
+        margin-left: auto;
+      }
+  
+      .sortBtn {
+        background: transparent;
+        display: block;
+      }
+
+      @media (min-width: 768px) {
+        flex-direction: column;
+        p.resultsP, p.filterP, .sortBtn  {
+          display: none;
+        }
+      }
+    }
+
+    .itemGrid {
+      flex-grow: 1;
+      border: 1px solid red;
+    }
+
+    @media (min-width: 768px) {
+      display: flex;
     }
   }
 }

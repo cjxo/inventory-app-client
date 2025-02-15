@@ -8,7 +8,7 @@ const App = () => {
     <>
       <TopBarWide />
       <TopBarNarrow />
-      <main>
+      <main className="common-container">
         <Outlet />
       </main>
       <Footer />
