@@ -1,4 +1,5 @@
 import styles from "../styles/component.module.css";
+import categoryStyles from "./CategoryStyles";
 
 const SortOptionsWide = () => {
   return (
@@ -39,15 +40,15 @@ const SortOptionsWide = () => {
         <form>
           <div className={styles.inputLabelPair}>
             <input id="potion" value="potion" name="potion" type="checkbox" />
-            <label style={{backgroundColor: "#777ae6", padding: "4px 8px", borderRadius: "10px"}} htmlFor="potion">Potion</label>
+            <label style={categoryStyles.potion} htmlFor="potion">Potion</label>
           </div>
           <div className={styles.inputLabelPair}>
             <input id="food" value="food" name="food" type="checkbox" />
-            <label style={{backgroundColor: "#e2b86c", padding: "4px 8px", borderRadius: "10px"}} htmlFor="food">Food</label>
+            <label style={categoryStyles.food} htmlFor="food">Food</label>
           </div>
           <div className={styles.inputLabelPair}>
             <input id="gems" value="gems" name="gems" type="checkbox" />
-            <label style={{backgroundColor: "#77e6a1", padding: "4px 8px", borderRadius: "10px"}} htmlFor="gems">Gems</label>
+            <label style={categoryStyles.gems} htmlFor="gems">Gems</label>
           </div>
         </form>
 
