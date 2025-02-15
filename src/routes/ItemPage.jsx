@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "../styles/route.module.css";
 import ButtonImage from "../components/ButtonImage";
 import NarrowSortDropdown from "../components/NarrowSortDropdown";
+import SortOptionsWide from "../components/SortOptionsWide";
 
 const ItemPage = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
@@ -20,7 +21,9 @@ const ItemPage = () => {
             height={32}
             className={styles.sortBtn}
             onClick={() => setOpenDropDown(!openDropDown)}
-          />
+          /> 
+          
+          <SortOptionsWide />
         </div>
 
         {openDropDown && <NarrowSortDropdown />}

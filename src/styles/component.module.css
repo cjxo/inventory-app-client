@@ -176,4 +176,30 @@ footer {
       }
     }
   }
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.sortDropdownWide {
+  display: none;
+  flex-direction: column;
+  gap: 20px;
+  .sortGroup {
+    h3 {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
 }
