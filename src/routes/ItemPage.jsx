@@ -3,7 +3,7 @@ import styles from "../styles/route.module.css";
 import ButtonImage from "../components/ButtonImage";
 import NarrowSortDropdown from "../components/NarrowSortDropdown";
 import SortOptionsWide from "../components/SortOptionsWide";
-import categoryStyles from "../components/CategoryStyles";
+import ItemListGrid from "../components/ItemListGrid";
 
 const ItemPage = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
@@ -28,32 +28,8 @@ const ItemPage = () => {
         </div>
 
         {openDropDown && <NarrowSortDropdown />}
-    
-        <ul className={styles.itemGrid}>
-          <li className={styles.itemCard}>
-            <div className={styles.image}>
-            </div>
-            <div className={styles.itemInfo} style={{background: categoryStyles.potion.backgroundColor}}>
-              <div className={styles.nameAndPrice}>
-                <p>Name</p>
-                <p>$99.99</p>
-              </div>
-              <p>Quantity: 0</p> 
-            </div>
-          </li>
 
-          <li className={styles.itemCard}>
-            <div className={styles.image}>
-            </div>
-            <div className={styles.itemInfo} style={{background: categoryStyles.potion.backgroundColor}}>
-              <div className={styles.nameAndPrice}>
-                <p>Name</p>
-                <p>$99.99</p>
-              </div>
-              <p>Quantity: 0</p> 
-            </div>
-          </li>
-        </ul>
+        <ItemListGrid />
       </div>
     </div>
   );

@@ -203,3 +203,65 @@ footer {
     display: flex;
   }
 }
+
+.itemGrid {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  li.itemCard { 
+    height: fit-content;
+    background: white;
+    border: 1px solid var(--green-colour1);
+
+    border-radius: 8px;
+
+    .image {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .itemInfo {
+      background: red;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      color: var(--green-colour1);
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      .quantityAndPrice {
+        display: flex;
+        justify-content: space-between;
+      } 
+    }
+    
+    /* TESTING */
+    .categoryTags {
+      margin-top: auto;
+      background-color: var(--green-colour3);
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      padding: 12px;
+
+      display: flex;
+      justify-content: center;
+    }
+
+    .categoryTag {
+      margin-top: auto;
+      color: var(--green-colour1);
+      text-align: center;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+  }
+}
