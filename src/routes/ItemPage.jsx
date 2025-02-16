@@ -7,6 +7,21 @@ import ItemListGrid from "../components/ItemListGrid";
 
 const ItemPage = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
+  
+  const [filters, setFilters] = useState({
+    nameSortOrder: "none",
+    priceSortOrder: "none",
+    categories: {
+      potion: false,
+      food: false,
+      gems: false,
+    },
+  });
+  const handleFiltersChange = (filtersData) => {
+    console.log(filtersData);
+    setFilters(filtersData);
+  };
+
   const items = [
     {
       id: 1,
@@ -99,22 +114,20 @@ const ItemPage = () => {
             onClick={() => setOpenDropDown(!openDropDown)}
           /> 
 
-          <SortOptionsWide />
+          <SortOptionsWide onFiltersChanged={handleFiltersChange} />
         </div>
 
         {openDropDown && <NarrowSortDropdown />}
 
-        <ItemListGrid items={items}/>
+        <ItemListGrid
+          items={items}
+          nameSortOrder={filters.nameSortOrder}
+          priceSortOrder={filters.priceSortOrder}
+          categories={filters.categories}
+        />
       </div>
     </div>
   );
 };
-
-    {/*<p
-              className={styles.categoryTag}
-              style={{
-                  backgroundColor: categoryStyles.potion.backgroundColor,
-                  padding: categoryStyles.potion.padding,
-              }}>Potion</p>*/}
 
 export default ItemPage;
