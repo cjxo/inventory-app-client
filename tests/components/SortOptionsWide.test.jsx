@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import SortOptionsWide from "../../src/components/SortOptionsWide";
 
-
 describe("SortOptionsWide Component Testing", () => {
   beforeEach(() => {
     render(<SortOptionsWide />);
