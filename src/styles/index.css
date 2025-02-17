@@ -94,6 +94,7 @@ ul {
     border-radius: 8px;
     color: var(--green-colour1);
     background-color: var(--green-colour2);
+    margin-bottom: 8px;
     
     @media (min-width: 1024px) {
       font-size: 18px;

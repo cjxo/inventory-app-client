@@ -39,7 +39,7 @@ main {
       padding: 16px;
       color: var(--green-colour1);
       background-color: var(--green-colour3);
-      margin: 8px 0px;
+      margin-bottom: 8px;
 
       p.filterP {
         margin-left: auto;

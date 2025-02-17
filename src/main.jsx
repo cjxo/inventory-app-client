@@ -5,6 +5,7 @@ import './styles/index.css';
 import HomePage from "./routes/HomePage";
 import ItemPage from "./routes/ItemPage";
 import CategoryPage from "./routes/CategoryPage";
+import AddItemPage from "./routes/AddItemPage";
 import App from './App.jsx';
 
 import {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         path: "/categories",
         element: <CategoryPage />
       },
+      {
+        path: "/items/add",
+        element: <AddItemPage />,
+      }
     ],
   },
 ]);
