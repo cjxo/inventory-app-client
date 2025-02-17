@@ -3,12 +3,11 @@ import PropTypes from "prop-types";
 
 const PixelArtCanvas = ({ src, alt, scaleX=1, scaleY=1 }) => {
   const canvasRef = useRef();
-  const imgRef = useRef();
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    const img = imgRef.current;
+    const img = new Image();
 
     img.onload = () => {
       const imgWidth = img.width;
@@ -20,6 +19,7 @@ const PixelArtCanvas = ({ src, alt, scaleX=1, scaleY=1 }) => {
       ctx.imageSmoothingEnabled = false;
       ctx.drawImage(img, 0, 0, imgWidth, imgHeight, 0, 0, imgWidth * scaleX, imgHeight * scaleY);
 
+      //alert("Hello");
       // Suppose that we use a nearest-neighbor sampler.
       // My problem is that I want to somehow _retain_ the crisp of the pixel (texel) art, while removing "wobbly" or "irregular"
       // pixel sizes caused by aliasing. This occurs when placing the pixel art on some non-integer position.
@@ -30,11 +30,13 @@ const PixelArtCanvas = ({ src, alt, scaleX=1, scaleY=1 }) => {
       // we want bilinear filtering. When inside (far from) the texel, we use nearest neighbor filtering. How to achieve this? Well, this property does:
       // ctx.imageSmoothingEnabled = false;
     };
-  }, [src]);
+    
+    img.src = src;
+  }, [src, scaleX, scaleY]);
 
   return (
     <canvas ref={canvasRef}>
-      <img ref={imgRef} src={src} alt={alt} style={{ display: 'none' }} />
+      {/*<img ref={imgRef} src={src} alt={alt} style={{ display: 'none' }} />*/}
     </canvas>
   );
 };
