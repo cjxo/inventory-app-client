@@ -27,7 +27,7 @@ describe("SortOptionsWide Component Testing", () => {
     expect(screen.getByRole("checkbox", { name: "Gems" })).toBeInTheDocument();
   });
 
-// my first time mocking, do not laugh at me PLES  
+  // my first time mocking, do not laugh at me PLES  
   test("calls onFiltersChanged when radio buttons for sorting by name are clicked", async () => {
     const onFiltersChanged = vi.fn();
     const user = userEvent.setup();

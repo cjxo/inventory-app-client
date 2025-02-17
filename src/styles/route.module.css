@@ -32,7 +32,6 @@ main {
 
 .itemPage {
   .mainDisplay {
-    position: relative;
     .sortBar {
       display: flex;
       align-items: center;

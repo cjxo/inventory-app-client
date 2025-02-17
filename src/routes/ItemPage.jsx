@@ -18,6 +18,7 @@ const ItemPage = () => {
       gems: false,
     },
   });
+
   const handleFiltersChange = (filtersData) => {
     console.log(filtersData);
     setFilters(filtersData);
@@ -121,7 +122,7 @@ const ItemPage = () => {
           <SortOptionsWide onFiltersChanged={handleFiltersChange} />
         </div>
 
-        {openDropDown && <NarrowSortDropdown />}
+        {openDropDown && <NarrowSortDropdown onFiltersChanged={handleFiltersChange} defaultFilters={filters} />}
 
         <ItemListGrid
           items={items}

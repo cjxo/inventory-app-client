@@ -146,10 +146,10 @@ footer {
   margin-top: -9px;
   background-color: var(--green-colour3);
   width: 100%;
-  position: absolute;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-bottom: 8px;
 
   .sortGroup {
     h3 {
