@@ -27,16 +27,6 @@ main {
     display: flex;
     gap: 20px;
     justify-content: center;
-    a {
-      padding: 14px 20px;
-      border-radius: 8px;
-      color: var(--green-colour1);
-      background-color: var(--green-colour2);
-      
-      @media (min-width: 1024px) {
-        font-size: 18px;
-      }
-    }
   }
 }
 

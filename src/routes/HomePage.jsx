@@ -12,8 +12,8 @@ const HomePage = () => {
       </div>
   
       <div className={styles.linkButtons}>
-        <Link to="/items">See Items</Link>
-        <Link to="/categories">See Categories</Link>
+        <Link className="common-link-style" to="/items">See Items</Link>
+        <Link className="common-link-style" to="/categories">See Categories</Link>
       </div>
 
       <ScrollableItems /> 

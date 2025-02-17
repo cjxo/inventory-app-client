@@ -68,7 +68,13 @@ ul {
 .common-container {
   max-width: 1400px;
   margin: 0 auto;
-
+  
+  .prologue {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
   .title {
     font-size: 26px;
     font-weight: 600;
@@ -80,6 +86,17 @@ ul {
 
     @media (min-width: 1024px) {
       font-size: 36px;
+    }
+  }
+  
+  .common-link-style {
+    padding: 14px 20px;
+    border-radius: 8px;
+    color: var(--green-colour1);
+    background-color: var(--green-colour2);
+    
+    @media (min-width: 1024px) {
+      font-size: 18px;
     }
   }
 }

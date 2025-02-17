@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "../styles/route.module.css";
 import ButtonImage from "../components/ButtonImage";
 import NarrowSortDropdown from "../components/NarrowSortDropdown";
@@ -99,7 +100,10 @@ const ItemPage = () => {
   
   return (
     <div className={styles.itemPage}>
-      <h1 className="title">Items</h1>
+      <div className="prologue">
+        <h1 className="title">Items</h1>
+        <Link to="add" className="common-link-style">Add Item</Link>
+      </div>
       <div className={styles.mainDisplay}>
         <div className={styles.sortBar}>
           <p className={styles.resultsP}>0 results</p>
