@@ -10,12 +10,14 @@ describe("SortOptionsWide Component Testing", () => {
     expect(screen.getByRole("heading", { name: "Sort By Name" }));
     expect(screen.getAllByRole("radio", { name: "Ascending" })[0]).toHaveAttribute("id", "name-asc");
     expect(screen.getAllByRole("radio", { name: "Descending" })[0]).toHaveAttribute("id", "name-desc");
+    expect(screen.getAllByRole("radio", { name: "None" })[0]).toHaveAttribute("id", "name-none");
   });
 
   test("renders price sort correctly", () => {
     expect(screen.getByRole("heading", { name: "Sort By Price" }));
     expect(screen.getAllByRole("radio", { name: "Ascending" })[1]).toHaveAttribute("id", "price-asc");
     expect(screen.getAllByRole("radio", { name: "Descending" })[1]).toHaveAttribute("id", "price-desc");
+    expect(screen.getAllByRole("radio", { name: "None" })[1]).toHaveAttribute("id", "price-none");
   });
 
   test("renders category filter correctly", () => {

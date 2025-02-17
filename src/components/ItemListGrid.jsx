@@ -4,26 +4,21 @@ import categoryStyles from "./CategoryStyles";
 import PixelArtCanvas from "./PixelArtCanvas";
 import styles from "../styles/component.module.css";
 
-const ItemListGrid = ({ items, nameSortOrder, priceSortOrder, categories }) => {
-  //https://stackoverflow.com/questions/1248081/how-to-get-the-browser-viewport-dimensions
-  const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
- //const viewportHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-  
-  let scaleX = 8;
-  let scaleY = 8;
-  if (viewportWidth <= 768) {
-    scaleX = 6;
-    scaleY = 6;
-  }
-
-  const itemsToRender = items.filter(item => {
+// so far, from what I understand about testing, pull out functions from
+// components to be "testable" as a unit
+const filterItemsByCategory = (items, categories) => {
+  return items.filter(item => {
     if (!categories.potion && !categories.food && !categories.gems) return true;
     if (categories.potion && (item.type === "potion")) return true;
     if (categories.food && (item.type === "food")) return true;
     if (categories.gems && (item.type === "gems")) return true;
 
     return false;
-  }).sort((a, b) => {
+  });
+};
+
+const sortByName = (items, nameSortOrder) => {
+  return items.sort((a, b) => {
     if (nameSortOrder === "asc") {
       if (a.name < b.name) return -1;
       if (a.name > b.name) return 1;
@@ -31,9 +26,13 @@ const ItemListGrid = ({ items, nameSortOrder, priceSortOrder, categories }) => {
       if (a.name > b.name) return -1;
       if (a.name < b.name) return 1;
     }
-
+    
     return 0;
-  }).sort((a, b) => {
+  });
+};
+
+const sortByPrice = (items, priceSortOrder) => {
+  return items.sort((a, b) => {
     const aa = parseFloat(a.price.substring(1));
     const bb = parseFloat(b.price.substring(1));
     if (priceSortOrder === "asc") {
@@ -46,6 +45,21 @@ const ItemListGrid = ({ items, nameSortOrder, priceSortOrder, categories }) => {
 
     return 0;
   });
+};
+
+const ItemListGrid = ({ items, nameSortOrder, priceSortOrder, categories }) => {
+  //https://stackoverflow.com/questions/1248081/how-to-get-the-browser-viewport-dimensions
+  const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+ //const viewportHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+  
+  let scaleX = 8;
+  let scaleY = 8;
+  if (viewportWidth <= 768) {
+    scaleX = 6;
+    scaleY = 6;
+  }
+
+  const itemsToRender = sortByPrice(sortByName(filterItemsByCategory(items, categories), nameSortOrder), priceSortOrder);
 
   return (
     <ul className={styles.itemGrid}>
@@ -93,3 +107,4 @@ ItemListGrid.propTypes = {
 };
 
 export default ItemListGrid;
+export { filterItemsByCategory, sortByName, sortByPrice };
