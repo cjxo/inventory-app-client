@@ -13,8 +13,7 @@ const defaultFilters = {
 };
 
 describe("NarrowSortDropdown Component Testing", () => {
-  describe("Rendering test", () => {
-  
+  describe("Rendering test", () => {  
     test("renders name sort correctly", () => {
       render(<NarrowSortDropdown defaultFilters={defaultFilters} />);
       const heading = screen.getByRole("heading", { name: "Sort By Name" });

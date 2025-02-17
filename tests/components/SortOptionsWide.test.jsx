@@ -2,9 +2,19 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import SortOptionsWide from "../../src/components/SortOptionsWide";
 
+const defaultFilters = {
+  nameSortOrder: "none",
+  priceSortOrder: "none",
+  categories: {
+    potion: false,
+    food: false,
+    gems: false,
+  },
+};
+
 describe("SortOptionsWide Component Testing", () => {  
   test("renders name sort correctly", () => {
-    render(<SortOptionsWide />);
+    render(<SortOptionsWide defaultFilters={defaultFilters} />);
     expect(screen.getByRole("heading", { name: "Sort By Name" }));
     expect(screen.getAllByRole("radio", { name: "Ascending" })[0]).toHaveAttribute("id", "name-asc");
     expect(screen.getAllByRole("radio", { name: "Descending" })[0]).toHaveAttribute("id", "name-desc");
@@ -12,7 +22,7 @@ describe("SortOptionsWide Component Testing", () => {
   });
 
   test("renders price sort correctly", () => {
-    render(<SortOptionsWide />);
+    render(<SortOptionsWide defaultFilters={defaultFilters} />);
     expect(screen.getByRole("heading", { name: "Sort By Price" }));
     expect(screen.getAllByRole("radio", { name: "Ascending" })[1]).toHaveAttribute("id", "price-asc");
     expect(screen.getAllByRole("radio", { name: "Descending" })[1]).toHaveAttribute("id", "price-desc");
@@ -20,7 +30,7 @@ describe("SortOptionsWide Component Testing", () => {
   });
 
   test("renders category filter correctly", () => {
-    render(<SortOptionsWide />);
+    render(<SortOptionsWide defaultFilters={defaultFilters} />);
     expect(screen.getByRole("heading", { name: "Filter By Category" }));
     expect(screen.getByRole("checkbox", { name: "Potion" })).toBeInTheDocument();
     expect(screen.getByRole("checkbox", { name: "Food" })).toBeInTheDocument();
@@ -32,7 +42,7 @@ describe("SortOptionsWide Component Testing", () => {
     const onFiltersChanged = vi.fn();
     const user = userEvent.setup();
     
-    render(<SortOptionsWide onFiltersChanged={onFiltersChanged} />);
+    render(<SortOptionsWide onFiltersChanged={onFiltersChanged} defaultFilters={defaultFilters} />);
     
     const asc = screen.getAllByRole("radio", { name: "Ascending" })[0];
     const desc = screen.getAllByRole("radio", { name: "Descending" })[0];
@@ -52,7 +62,7 @@ describe("SortOptionsWide Component Testing", () => {
     const onFiltersChanged = vi.fn();
     const user = userEvent.setup();
     
-    render(<SortOptionsWide onFiltersChanged={onFiltersChanged} />);
+    render(<SortOptionsWide onFiltersChanged={onFiltersChanged} defaultFilters={defaultFilters} />);
     
     const asc = screen.getAllByRole("radio", { name: "Ascending" })[1];
     const desc = screen.getAllByRole("radio", { name: "Descending" })[1];
@@ -72,7 +82,7 @@ describe("SortOptionsWide Component Testing", () => {
     const onFiltersChanged = vi.fn();
     const user = userEvent.setup();
     
-    render(<SortOptionsWide onFiltersChanged={onFiltersChanged} />);
+    render(<SortOptionsWide onFiltersChanged={onFiltersChanged} defaultFilters={defaultFilters} />);
 
     const potion = screen.getByRole("checkbox", { name: "Potion" });
     const food = screen.getByRole("checkbox", { name: "Food" });

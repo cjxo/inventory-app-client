@@ -119,7 +119,7 @@ const ItemPage = () => {
             onClick={() => setOpenDropDown(!openDropDown)}
           /> 
 
-          <SortOptionsWide onFiltersChanged={handleFiltersChange} />
+          <SortOptionsWide onFiltersChanged={handleFiltersChange} defaultFilters={filters} />
         </div>
 
         {openDropDown && <NarrowSortDropdown onFiltersChanged={handleFiltersChange} defaultFilters={filters} />}

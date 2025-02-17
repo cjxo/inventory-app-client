@@ -4,14 +4,10 @@ import PropTypes from "prop-types";
 import styles from "../styles/component.module.css";
 import categoryStyles from "./CategoryStyles";
 
-const SortOptionsWide = ({ onFiltersChanged }) => {
-  const [nameSortOrder, setNameSortOrder] = useState("none");
-  const [priceSortOrder, setPriceSortOrder] = useState("none");
-  const [categories, setCategories] = useState({
-    potion: false,
-    food: false,
-    gems: false,
-  });
+const SortOptionsWide = ({ onFiltersChanged, defaultFilters }) => {
+  const [nameSortOrder, setNameSortOrder] = useState(defaultFilters.nameSortOrder);
+  const [priceSortOrder, setPriceSortOrder] = useState(defaultFilters.priceSortOrder);
+  const [categories, setCategories] = useState(defaultFilters.categories);
 
   const setFilters = (nameSortOrder, priceSortOrder, categories) => {
     onFiltersChanged({ nameSortOrder, priceSortOrder, categories });
@@ -106,6 +102,15 @@ const SortOptionsWide = ({ onFiltersChanged }) => {
 
 SortOptionsWide.propTypes = {
   onFiltersChanged: PropTypes.func.isRequired,
+  defaultFilters: PropTypes.shape({
+    nameSortOrder: PropTypes.oneOf(["none", "asc", "desc"]).isRequired,
+    priceSortOrder: PropTypes.oneOf(["none", "asc", "desc"]).isRequired,
+    categories: PropTypes.shape({
+      potion: PropTypes.bool.isRequired,
+      food: PropTypes.bool.isRequired,
+      gems: PropTypes.bool.isRequired,
+    }),
+  }).isRequired,
 };
 
 export default SortOptionsWide;
