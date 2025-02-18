@@ -13,7 +13,7 @@ const CategoryPage = () => {
       
       <ul className={styles.categoryList}>
         <li style={{backgroundColor: categoryStyles.food.backgroundColor}}>
-          <p>food</p>
+          <p>Food</p>
           <button>
             <PixelArtCanvas
               src="./src/assets/textures/trash.png"
@@ -25,7 +25,7 @@ const CategoryPage = () => {
         </li>
         
         <li style={{backgroundColor: categoryStyles.potion.backgroundColor}}>
-          <p>potion</p>
+          <p>Potion</p>
           <button>
             <PixelArtCanvas
               src="./src/assets/textures/trash.png"
@@ -37,7 +37,7 @@ const CategoryPage = () => {
         </li>
         
         <li style={{backgroundColor: categoryStyles.gems.backgroundColor}}>
-          <p>gems</p>
+          <p>Gems</p>
           <button>
             <PixelArtCanvas
               src="./src/assets/textures/trash.png"

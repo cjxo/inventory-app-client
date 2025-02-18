@@ -44,7 +44,7 @@ const AddItemPage = () => {
         
         <div className={styles.labelInputPair}>
           <label htmlFor="item-quantity">Quantity</label>
-          <input type="number" id="item-quantity" name="item-quantity" required />
+          <input type="number" id="item-quantity" name="item-quantity" min="0" max="9999" required />
         </div>
         
         <FileUploader />
