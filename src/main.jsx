@@ -6,6 +6,7 @@ import HomePage from "./routes/HomePage";
 import ItemPage from "./routes/ItemPage";
 import CategoryPage from "./routes/CategoryPage";
 import AddItemPage from "./routes/AddItemPage";
+import AddCategoryPage from "./routes/AddCategoryPage";
 import App from './App.jsx';
 
 import {
@@ -33,7 +34,11 @@ const router = createBrowserRouter([
       {
         path: "/items/add",
         element: <AddItemPage />,
-      }
+      },
+      {
+        path: "/categories/add",
+        element: <AddCategoryPage />,
+      },
     ],
   },
 ]);

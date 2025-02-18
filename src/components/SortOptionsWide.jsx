@@ -94,7 +94,6 @@ const SortOptionsWide = ({ onFiltersChanged, defaultFilters }) => {
             <label style={categoryStyles.gems} htmlFor="gems">Gems</label>
           </div>
         </form>
-
       </div>
     </div>
   );

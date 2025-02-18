@@ -102,3 +102,29 @@ main {
     }
   }
 }
+
+.categoryPage {
+  .categoryList {
+    color: var(--green-colour1);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 8px;
+    font-size: 20px;
+    
+    li {
+      padding: 8px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      
+      p {
+        text-align: center;
+        flex-grow: 1;
+      }
+      
+      button {
+        background: transparent;
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
-const PixelArtCanvas = ({ src, alt, scaleX=1, scaleY=1 }) => {
+const PixelArtCanvas = ({ src, alt, scaleX=1, scaleY=1, ...rest }) => {
   const canvasRef = useRef();
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const PixelArtCanvas = ({ src, alt, scaleX=1, scaleY=1 }) => {
   }, [src, scaleX, scaleY]);
 
   return (
-    <canvas ref={canvasRef}>
+    <canvas ref={canvasRef} {...rest}>
       {/*<img ref={imgRef} src={src} alt={alt} style={{ display: 'none' }} />*/}
     </canvas>
   );
