@@ -13,11 +13,11 @@ const PixelArtCanvas = ({ src, alt, scaleX=1, scaleY=1 }) => {
       const imgWidth = img.width;
       const imgHeight = img.height;
 
-      canvas.width = imgWidth * scaleX;
-      canvas.height = imgHeight * scaleY;
+      canvas.width = Math.min(imgWidth * scaleX, 128);
+      canvas.height = Math.min(imgHeight * scaleY, 128);
 
       ctx.imageSmoothingEnabled = false;
-      ctx.drawImage(img, 0, 0, imgWidth, imgHeight, 0, 0, imgWidth * scaleX, imgHeight * scaleY);
+      ctx.drawImage(img, 0, 0, imgWidth, imgHeight, 0, 0, canvas.width, canvas.height);
 
       //alert("Hello");
       // Suppose that we use a nearest-neighbor sampler.
