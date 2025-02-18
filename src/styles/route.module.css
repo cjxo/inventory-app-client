@@ -67,38 +67,39 @@ main {
 }
 
 .addItemPage {
-  form {
+}
+
+form.form0 {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 768px;
+  gap: 16px;
+  
+  label, input, button, p {
+    color: var(--green-colour1);
+    font-size: 16px;
+  }
+  
+  .labelInputPair {
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
-    max-width: 768px;
+    gap: 8px;
+    
+    input[type="text"], input[type="number"] {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--green-colour1);
+    }
+  }
+  
+  .radios {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 16px;
     
-    label, input, button, p {
-      color: var(--green-colour1);
-      font-size: 16px;
-    }
-    
-    .labelInputPair {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      
-      input[type="text"], input[type="number"] {
-        padding: 10px 16px;
-        border-radius: 8px;
-        border: 1px solid var(--green-colour1);
-      }
-    }
-    
-    .radios {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 16px;
-      
-      label {
-        margin-left: 4px;
-      }
+    label {
+      margin-left: 4px;
     }
   }
 }
@@ -126,5 +127,18 @@ main {
         background: transparent;
       }
     }
+  }
+}
+
+.addCategoryPage {
+  .colourSelectWrap {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--green-colour1);
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
   }
 }

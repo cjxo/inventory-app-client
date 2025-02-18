@@ -11,7 +11,7 @@ const AddItemPage = () => {
       <div className="prologue">
         <h1 className="title">Add Item</h1>
       </div>
-      <form>
+      <form className={styles.form0}>
         <div className={styles.labelInputPair}>
           <label htmlFor="item-name">Name</label>
           <input type="text" id="item-name" name="item-name" required />
