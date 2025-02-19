@@ -317,6 +317,14 @@ footer {
 .scrollableItemsContainer {
   --slider-card-count: 2;
 
+  @media (min-width: 500px) {
+    --slider-card-count: 4;
+  }
+  
+  @media (min-width: 1024px) {
+    --slider-card-count: 6;
+  }
+  
   .slider {
     position: relative;
     display: flex;
