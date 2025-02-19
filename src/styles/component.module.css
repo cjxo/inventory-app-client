@@ -313,3 +313,48 @@ footer {
 .buttonImage {
   background: transparent;
 }
+
+.scrollableItemsContainer {
+  --slider-card-count: 2;
+
+  .slider {
+    position: relative;
+    display: flex;
+    height: 150px;
+    
+    border: 1px solid red;
+    
+    .sliderWrapper {
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+      
+      .sliderCard {
+        flex-shrink: 0;
+        flex-grow: 1;
+        flex-basis: calc(100% / var(--slider-card-count));
+        
+        border: 1px solid black;
+      }
+    }
+  }
+  
+  .scrollBtn {
+    top: 50%;
+    transform: translateY(-50%) translateX(-20%); /* anchor: 0.5 in the Y */
+    
+    position: absolute;
+    padding: 4px;
+    background-color: var(--green-colour2);
+    border-radius: 50%;
+    img {
+      width: 30px;
+      height: 30px;
+    }
+    
+    &:last-child {
+      right: 0px;
+      transform: translateY(-50%) translateX(20%);
+    }
+  }
+}

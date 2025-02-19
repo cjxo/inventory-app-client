@@ -75,17 +75,19 @@ ul {
     justify-content: space-between;
   }
   
-  .title {
+  h1.title {
     font-size: 26px;
+    @media (min-width: 1024px) {
+      font-size: 36px;
+    }
+  }
+  
+  .title {
     font-weight: 600;
     margin-bottom: 16px;
     color: var(--green-colour1);
     em {
       font-family: "exo2it";
-    }
-
-    @media (min-width: 1024px) {
-      font-size: 36px;
     }
   }
   
