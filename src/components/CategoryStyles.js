@@ -1,4 +1,9 @@
 const categoryStyles = {
+  uncategorized: {
+    backgroundColor: "#ffffff",
+    padding: "4px 8px",
+    borderRadius: "10px",
+  },
   potion: {
     backgroundColor: "#777ae6",
     padding: "4px 8px",
