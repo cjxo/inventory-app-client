@@ -123,8 +123,10 @@ form.form0 {
         flex-grow: 1;
       }
       
-      button {
-        background: transparent;
+      .removeCategory {
+        img {
+          width: 24px;
+        }
       }
     }
   }
