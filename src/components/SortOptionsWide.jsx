@@ -2,9 +2,10 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 
 import styles from "../styles/component.module.css";
-import categoryStyles from "./CategoryStyles";
+import useCategory from "../hooks/useCategory";
 
 const SortOptionsWide = ({ onFiltersChanged, defaultFilters }) => {
+  const categoryContext = useCategory();
   const [nameSortOrder, setNameSortOrder] = useState(defaultFilters.nameSortOrder);
   const [priceSortOrder, setPriceSortOrder] = useState(defaultFilters.priceSortOrder);
   const [categories, setCategories] = useState(defaultFilters.categories);
@@ -30,7 +31,8 @@ const SortOptionsWide = ({ onFiltersChanged, defaultFilters }) => {
       ...categories,
       [name]: checked,
     };
-
+    
+    console.log(newCategories);
     setCategories(prevState => newCategories);
     setFilters(nameSortOrder, priceSortOrder, newCategories);
   };
@@ -81,18 +83,12 @@ const SortOptionsWide = ({ onFiltersChanged, defaultFilters }) => {
         <h3>Filter By Category</h3>
         
         <form>
-          <div className={styles.inputLabelPair}>
-            <input id="potion" value="potion" name="potion" type="checkbox" checked={categories.potion} onChange={handleCheckboxChange} />
-            <label style={categoryStyles.potion} htmlFor="potion">Potion</label>
-          </div>
-          <div className={styles.inputLabelPair}>
-            <input id="food" value="food" name="food" type="checkbox" checked={categories.food} onChange={handleCheckboxChange} />
-            <label style={categoryStyles.food} htmlFor="food">Food</label>
-          </div>
-          <div className={styles.inputLabelPair}>
-            <input id="gems" value="gems" name="gems" type="checkbox" checked={categories.gems} onChange={handleCheckboxChange} />
-            <label style={categoryStyles.gems} htmlFor="gems">Gems</label>
-          </div>
+          {categoryContext.categories.map(category => (
+            <div key={category.id} className={styles.inputLabelPair}>
+              <input id={category.name} value={category.name} name={category.name} type="checkbox" checked={!!categories[category.name]} onChange={handleCheckboxChange} />
+              <label style={{backgroundColor: category.background_colour}} className="category-label" htmlFor={category.name}>{category.name}</label>
+            </div>
+          ))}
         </form>
       </div>
     </div>
@@ -104,11 +100,7 @@ SortOptionsWide.propTypes = {
   defaultFilters: PropTypes.shape({
     nameSortOrder: PropTypes.oneOf(["none", "asc", "desc"]).isRequired,
     priceSortOrder: PropTypes.oneOf(["none", "asc", "desc"]).isRequired,
-    categories: PropTypes.shape({
-      potion: PropTypes.bool.isRequired,
-      food: PropTypes.bool.isRequired,
-      gems: PropTypes.bool.isRequired,
-    }),
+    categories: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
 };
 

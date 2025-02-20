@@ -1,19 +1,15 @@
 import PropTypes from "prop-types";
 
-import categoryStyles from "./CategoryStyles";
 import PixelArtCanvas from "./PixelArtCanvas";
 import styles from "../styles/component.module.css";
+import useCategory from "../hooks/useCategory";
 
 // so far, from what I understand about testing, pull out functions from
 // components to be "testable" as a unit
 const filterItemsByCategory = (items, categories) => {
   return items.filter(item => {
-    if (!categories.potion && !categories.food && !categories.gems) return true;
-    if (categories.potion && (item.type === "potion")) return true;
-    if (categories.food && (item.type === "food")) return true;
-    if (categories.gems && (item.type === "gems")) return true;
-
-    return false;
+    if (Object.values(categories).every(value => !value)) return true;
+    return Object.keys(categories).some(category => categories[category] && (item.type === category));
   });
 };
 
@@ -48,6 +44,7 @@ const sortByPrice = (items, priceSortOrder) => {
 };
 
 const ItemListGrid = ({ items, nameSortOrder, priceSortOrder, categories }) => {
+  const c = useCategory();
   //https://stackoverflow.com/questions/1248081/how-to-get-the-browser-viewport-dimensions
   const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
  //const viewportHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
@@ -73,7 +70,7 @@ const ItemListGrid = ({ items, nameSortOrder, priceSortOrder, categories }) => {
               scaleY={scaleY}
             />
           </div>
-          <div className={styles.itemInfo} style={{background: categoryStyles[item.type].backgroundColor}}>
+          <div className={`${styles.itemInfo}`} style={{background: c.categories.find(cat => cat.name === item.type)?.background_colour}}>
               <p>{item.name}</p>
             <div className={styles.quantityAndPrice}>
               <p className={styles.quantity}>x{item.quantity}</p> 
@@ -99,11 +96,7 @@ ItemListGrid.propTypes = {
   ).isRequired,
   nameSortOrder: PropTypes.oneOf(["asc", "desc", "none"]).isRequired,
   priceSortOrder: PropTypes.oneOf(["asc", "desc", "none"]).isRequired,
-  categories: PropTypes.shape({
-    food: PropTypes.bool.isRequired,
-    potion: PropTypes.bool.isRequired,
-    gems: PropTypes.bool.isRequired,
-  }).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default ItemListGrid;

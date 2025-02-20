@@ -12,11 +12,7 @@ const ItemPage = () => {
   const [filters, setFilters] = useState({
     nameSortOrder: "none",
     priceSortOrder: "none",
-    categories: {
-      potion: false,
-      food: false,
-      gems: false,
-    },
+    categories: {},
   });
 
   const handleFiltersChange = (filtersData) => {

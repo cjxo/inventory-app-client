@@ -2,8 +2,10 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 
 import styles from "../styles/component.module.css";
+import useCategory from "../hooks/useCategory";
 
 const NarrowSortDropdown = ({ onFiltersChanged, defaultFilters }) => {
+  const categoryContext = useCategory();
   const [nameSortOrder, setNameSortOrder] = useState(defaultFilters.nameSortOrder);
   const [priceSortOrder, setPriceSortOrder] = useState(defaultFilters.priceSortOrder);
   const [categories, setCategories] = useState(defaultFilters.categories);
@@ -51,9 +53,15 @@ const NarrowSortDropdown = ({ onFiltersChanged, defaultFilters }) => {
       <div className={styles.sortGroup}>
         <h3>Filter By Category</h3>
         <div className={styles.buttons}>
-          <button onClick={() => toggleCategory("potion")} className={categories.potion ? styles.selected : ""}>Potion</button>
-          <button onClick={() => toggleCategory("food")} className={categories.food ? styles.selected : ""}>Food</button>
-          <button onClick={() => toggleCategory("gems")} className={categories.gems ? styles.selected : ""}>Gems</button>
+          {categoryContext.categories.map(category => (
+            <button
+              key={category.id}
+              onClick={() => toggleCategory(category.name)}
+              className={categories[category.name] ? styles.selected : ""}
+            >
+              {category.name}
+            </button>
+          ))}
         </div>
       </div>
     </div>
@@ -65,11 +73,7 @@ NarrowSortDropdown.propTypes = {
   defaultFilters: PropTypes.shape({
     nameSortOrder: PropTypes.oneOf(["none", "asc", "desc"]).isRequired,
     priceSortOrder: PropTypes.oneOf(["none", "asc", "desc"]).isRequired,
-    categories: PropTypes.shape({
-      potion: PropTypes.bool.isRequired,
-      food: PropTypes.bool.isRequired,
-      gems: PropTypes.bool.isRequired,
-    }),
+    categories: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
 };
 
