@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import styles from "../styles/route.module.css";
-import categoryStyles from "../components/CategoryStyles";
-import PixelArtCanvas from "../components/PixelArtCanvas";
 import ButtonImage from "../components/ButtonImage";
+import useCategory from "../hooks/useCategory";
 
 const CategoryPage = () => {
+  const { categories, removeCategoryGivenID } = useCategory();
   return (
     <div className={styles.categoryPage}>
       <div className="prologue">
@@ -13,32 +13,17 @@ const CategoryPage = () => {
       </div>
       
       <ul className={styles.categoryList}>
-        <li style={{backgroundColor: categoryStyles.food.backgroundColor}}>
-          <p>Food</p>
-          <ButtonImage
-            src="./src/assets/svgrepo/trash-bin-trash-svgrepo-com.svg"
-            alt="remove food category"
-            className={styles.removeCategory}
-          />
-        </li>
-        
-        <li style={{backgroundColor: categoryStyles.potion.backgroundColor}}>
-          <p>Potion</p>
-          <ButtonImage
-            src="./src/assets/svgrepo/trash-bin-trash-svgrepo-com.svg"
-            alt="remove potion category"
-            className={styles.removeCategory}
-          />
-        </li>
-        
-        <li style={{backgroundColor: categoryStyles.gems.backgroundColor}}>
-          <p>Gems</p>
-          <ButtonImage
-            src="./src/assets/svgrepo/trash-bin-trash-svgrepo-com.svg"
-            alt="remove gems category"
-            className={styles.removeCategory}
-          />
-        </li>
+        {categories.map(category => (
+          <li key={category.id} style={{backgroundColor: category.background_colour}}>
+            <p>{category.name}</p>
+            {(category.id !== 1) && <ButtonImage
+              src="./src/assets/svgrepo/trash-bin-trash-svgrepo-com.svg"
+              alt={`remove ${category.name} category`}
+              className={styles.removeCategory}
+              onClick={() => removeCategoryGivenID(category.id)}
+            />}
+          </li>
+        ))}
       </ul>
     </div>
   );

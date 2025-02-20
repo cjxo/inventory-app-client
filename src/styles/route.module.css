@@ -121,6 +121,7 @@ form.form0 {
       p {
         text-align: center;
         flex-grow: 1;
+        text-transform: capitalize;
       }
       
       .removeCategory {
