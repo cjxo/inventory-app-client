@@ -316,33 +316,38 @@ footer {
 
 .scrollableItemsContainer {
   --slider-card-count: 2;
+  --slider-card-gap: 8px;
+  max-width: 1024px;
 
-  @media (min-width: 500px) {
+  @media (min-width: 600px) {
     --slider-card-count: 4;
   }
   
   @media (min-width: 1024px) {
-    --slider-card-count: 6;
+    --slider-card-count: 5;
   }
   
   .slider {
     position: relative;
     display: flex;
-    height: 150px;
-    
-    border: 1px solid red;
     
     .sliderWrapper {
       display: flex;
       overflow: hidden;
       width: 100%;
+      gap: var(--slider-card-gap);
+      scroll-behavior: smooth;
       
       .sliderCard {
+        padding: 32px 16px;
         flex-shrink: 0;
         flex-grow: 1;
-        flex-basis: calc(100% / var(--slider-card-count));
-        
-        border: 1px solid black;
+        flex-basis: calc(100% / var(--slider-card-count) - var(--slider-card-gap) + var(--slider-card-gap) / var(--slider-card-count));
+        border: 1px solid var(--green-colour0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
       }
     }
   }

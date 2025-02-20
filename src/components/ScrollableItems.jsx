@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import styles from "../styles/component.module.css";
 import ButtonImage from "./ButtonImage";
+import PixelArtCanvas from "./PixelArtCanvas";
 
 const ScrollableItems = ({ items }) => {
   const [ithChild, setIthChild] = useState(0);
@@ -10,25 +12,24 @@ const ScrollableItems = ({ items }) => {
     const container = containerRef.current;
     const containerAABB = container.getBoundingClientRect();
     const cardCount = window.getComputedStyle(container).getPropertyValue("--slider-card-count");
+    //const cardGap = parseInt(window.getComputedStyle(container).getPropertyValue("--slider-card-gap"));
     const borderWidthHalf = 0.5;
     const scrollLimit = (container.children.length - 1) - (cardCount - 1);
     
-    if (scrollDir === "L") {
-      const firstChild = container.children[0];
-      if (container.children.length > cardCount) {
+    if (container.children.length > cardCount) {
+      if (scrollDir === "L") {
+        const firstChild = container.children[0];
         if ((ithChild - 1) < 0) {
+          const toScrollTo = container.children[container.children.length - cardCount];
           setIthChild(scrollLimit);
-          container.scrollLeft = (container.children.length - 1) * (firstChild.offsetWidth - borderWidthHalf);
+          container.scrollLeft = toScrollTo.getBoundingClientRect().left - containerAABB.left + borderWidthHalf;
         } else {
           const ithChildNode = container.children[ithChild - 1];
           setIthChild(ithChild - 1);
           container.scrollLeft += ithChildNode.getBoundingClientRect().left - containerAABB.left + borderWidthHalf;
         }
-      }
-    } else if (scrollDir === "R") {
-      const ithChildNode = container.children[ithChild + 1];
-      
-      if (container.children.length > cardCount) {
+      } else if (scrollDir === "R") {
+        const ithChildNode = container.children[ithChild + 1];
         if (scrollLimit === ithChild) {
           container.scrollLeft = borderWidthHalf;
           setIthChild(0);
@@ -45,30 +46,21 @@ const ScrollableItems = ({ items }) => {
   };
   
   useEffect(() => {
+    const key = setInterval(() => {
+      handleScroll("R");
+    }, 5000);
+    
     const snap = () => {
-      const container = containerRef.current;
-      /*
-      const containerAABB = container.getBoundingClientRect();
-      const cardCount = window.getComputedStyle(container).getPropertyValue("--slider-card-count");
-      const scrollLimit = (container.children.length - 1) - (cardCount - 1);
-      const firstChild = container.children[0];
-      const borderWidthHalf = 0.5;
-      
-      if (container.children.length > cardCount) {
-        if ((ithChild - 1) < 0) {
-          container.scrollLeft = (container.children.length - 1) * (firstChild.offsetWidth - borderWidthHalf);
-        } else {
-          const ithChildNode = container.children[ithChild - 1];
-          container.scrollLeft += ithChildNode.getBoundingClientRect().left - containerAABB.left + borderWidthHalf;
-        }
-      } else {
-      }*/
-      container.scrollLeft = 0;
+      handleScroll("L");
+      //handleScroll("R");
     };
     
     addEventListener("resize", snap);
-    return () => removeEventListener("resize", snap);
-  }, []);
+    return () => {
+      removeEventListener("resize", snap);
+      clearInterval(key);
+    }
+  }, [ithChild]);
   
   return (
     <section className={`${styles.scrollableItemsContainer} common-container`}>
@@ -85,29 +77,16 @@ const ScrollableItems = ({ items }) => {
         />
         
         <div className={styles.sliderWrapper} ref={containerRef}>
-          <div className={styles.sliderCard}>
-            A
-          </div>
-          
-          <div className={styles.sliderCard}>
-            B
-          </div>
-          
-          <div className={styles.sliderCard}>
-            C
-          </div>
-          
-          <div className={styles.sliderCard}>
-            D
-          </div>
-          
-          <div className={styles.sliderCard}>
-            E
-          </div>
-          
-          <div className={styles.sliderCard}>
-            F
-          </div>
+          {items.map(item => (
+            <div key={item.id} className={styles.sliderCard}>
+              <PixelArtCanvas
+                src={item.src}
+                alt={item.name}
+                scaleX={8}
+                scaleY={8}
+              />
+            </div>
+          ))}
         </div>
         
         <ButtonImage
@@ -119,6 +98,19 @@ const ScrollableItems = ({ items }) => {
       </div>
     </section>
   );
+};
+
+ScrollableItems.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      quantity: PropTypes.number.isRequired,
+      type: PropTypes.string.isRequired,
+      src: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
 };
 
 export default ScrollableItems;
