@@ -1,10 +1,15 @@
 import { render, screen } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import AddItemPage from "../../src/routes/AddItemPage";
 
 describe("AddItemPage Test", () => {
   test("it renders correctly", () => {
-    render(<AddItemPage />);
+    render(
+      <BrowserRouter>
+        <AddItemPage />
+      </BrowserRouter>
+    );
     const header = screen.getByRole("heading", { name: "Add Item" });
     expect(header).toBeInTheDocument();
     

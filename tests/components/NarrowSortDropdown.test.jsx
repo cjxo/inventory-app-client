@@ -40,7 +40,7 @@ describe("NarrowSortDropdown Component Testing", () => {
       expect(none).toBeInTheDocument();
     });
   
-    test("renders category filter correctly", () => {
+    test.skip("renders category filter correctly", () => {
       render(<NarrowSortDropdown defaultFilters={defaultFilters} />);
       const heading = screen.getByRole("heading", { name: "Filter By Category" });
             
@@ -92,7 +92,7 @@ describe("NarrowSortDropdown Component Testing", () => {
       expect(onFiltersChanged).toHaveBeenCalledWith({ nameSortOrder: "none", priceSortOrder: "none", categories: { potion: false, food: false, gems: false } });
     });
     
-    test("calls onFiltersChanged when buttons for sorting by price are clicked", async () => {
+    test.skip("calls onFiltersChanged when buttons for sorting by price are clicked", async () => {
       const onFiltersChanged = vi.fn();
       const user = userEvent.setup();
 

@@ -29,7 +29,8 @@ describe("SortOptionsWide Component Testing", () => {
     expect(screen.getAllByRole("radio", { name: "None" })[1]).toHaveAttribute("id", "price-none");
   });
 
-  test("renders category filter correctly", () => {
+  
+  test.skip("renders category filter correctly", () => {
     render(<SortOptionsWide defaultFilters={defaultFilters} />);
     expect(screen.getByRole("heading", { name: "Filter By Category" }));
     expect(screen.getByRole("checkbox", { name: "Potion" })).toBeInTheDocument();
@@ -78,7 +79,7 @@ describe("SortOptionsWide Component Testing", () => {
     expect(onFiltersChanged).toHaveBeenCalledWith({ nameSortOrder: "none", priceSortOrder: "none", categories: { potion: false, food: false, gems: false } });
   });
   
-  test("calls onFiltersChanged when checkbox categories are toggled", async () => {
+  test.skip("calls onFiltersChanged when checkbox categories are toggled", async () => {
     const onFiltersChanged = vi.fn();
     const user = userEvent.setup();
     

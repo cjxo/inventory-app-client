@@ -8,6 +8,7 @@ import CategoryPage from "./routes/CategoryPage";
 import AddItemPage from "./routes/AddItemPage";
 import AddCategoryPage from "./routes/AddCategoryPage";
 import { CategoryProvider } from "./hooks/useCategory";
+import { ItemsProvider } from "./hooks/useItems";
 import App from './App.jsx';
 
 import {
@@ -47,7 +48,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <CategoryProvider>
-      <RouterProvider router={router} />
+      <ItemsProvider>
+        <RouterProvider router={router} />
+      </ItemsProvider>
     </CategoryProvider>
   </StrictMode>,
 );
