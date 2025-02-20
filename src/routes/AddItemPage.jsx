@@ -1,11 +1,12 @@
 import { useState, useRef } from "react";
 
 import styles from "../styles/route.module.css";
-import categoryStyles from "../components/CategoryStyles";
-//import PixelArtCanvas from "../components/PixelArtCanvas";
 import FileUploader from "../components/FileUploader";
+import useCategory from "../hooks/useCategory";
 
 const AddItemPage = () => {  
+  const { categories } = useCategory();
+  
   return (
     <div className={styles.addItemPage}>
       <div className="prologue">
@@ -20,20 +21,23 @@ const AddItemPage = () => {
         <div className={styles.labelInputPair}>
           <p>Category</p>
           <div className={styles.radios}>
-            <div className={styles.radioRadioPair}>
-              <input id="item-food" value="food" name="item-category" type="radio" defaultChecked />
-              <label htmlFor="item-food" style={categoryStyles.food}>Food</label>
-            </div>
-            
-            <div className={styles.radioRadioPair}>
-              <input id="item-potion" value="potion" name="item-category" type="radio" />
-              <label htmlFor="item-potion" style={categoryStyles.potion}>Potion</label>
-            </div>
-            
-            <div className={styles.radioRadioPair}>
-              <input id="item-gems" value="gems" name="item-category" type="radio" />
-              <label htmlFor="item-gems" style={categoryStyles.gems}>Gems</label>
-            </div>
+            {categories.map(category => (
+              <div key={category.id} className={styles.radioRadioPair}>
+                <input
+                  id={`item-${category.name}`}
+                  value={category.name}
+                  name="item-category"
+                  type="radio"
+                  defaultChecked={category.id === 1} />
+                <label
+                  htmlFor={`item-${category.name}`}
+                  style={{backgroundColor: category.background_colour}}
+                  className="category-label"
+                >
+                  {category.name}
+                </label>
+              </div>
+            ))}
           </div>
         </div>
         

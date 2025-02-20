@@ -94,12 +94,13 @@ form.form0 {
   }
   
   .radios {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     
     label {
       margin-left: 4px;
+      text-transform: capitalize;
     }
   }
 }
