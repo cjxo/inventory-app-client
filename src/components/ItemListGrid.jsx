@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import PixelArtCanvas from "./PixelArtCanvas";
 import styles from "../styles/component.module.css";
 import useCategory from "../hooks/useCategory";
+import useItems from "../hooks/useItems";
+import ButtonImage from "../components/ButtonImage";
 
 // so far, from what I understand about testing, pull out functions from
 // components to be "testable" as a unit
@@ -45,6 +47,7 @@ const sortByPrice = (items, priceSortOrder) => {
 
 const ItemListGrid = ({ items, nameSortOrder, priceSortOrder, categories }) => {
   const c = useCategory();
+  const { removeItemGivenID } = useItems();
   //https://stackoverflow.com/questions/1248081/how-to-get-the-browser-viewport-dimensions
   const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
  //const viewportHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
@@ -71,10 +74,19 @@ const ItemListGrid = ({ items, nameSortOrder, priceSortOrder, categories }) => {
             />
           </div>
           <div className={`${styles.itemInfo}`} style={{background: c.categories.find(cat => cat.name === item.type)?.background_colour}}>
+            <div className={styles.left}>
               <p>{item.name}</p>
-            <div className={styles.quantityAndPrice}>
               <p className={styles.quantity}>x{item.quantity}</p> 
               <p>{item.price}</p>
+            </div>
+            
+            <div className={styles.right}>
+              <ButtonImage
+                src="./src/assets/svgrepo/trash-bin-trash-svgrepo-com.svg"
+                alt={`remove ${item.name}`}
+                className={styles.removeItem}
+                onClick={() => removeItemGivenID(item.id)}
+              />
             </div>
           </div>
         </li>

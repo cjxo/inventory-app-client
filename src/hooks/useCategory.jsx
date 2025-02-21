@@ -29,7 +29,7 @@ const CategoryProvider = ({ children }) => {
   };
   
   const removeCategoryGivenID = async (id) => {
-    setCategories(prev => prev.filter(category => category.id != id));
+    setCategories(prev => prev.filter(category => category.id !== id));
   };
   
   return (

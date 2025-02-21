@@ -8,6 +8,7 @@ import {
 const ItemsContext = createContext({
   items: [],
   addItem: async (name, type, price, quantity, buffer) => {},
+  removeItemGivenID: async (id) => {},
 });
 
 const ItemsProvider = ({ children }) => {
@@ -95,8 +96,12 @@ const ItemsProvider = ({ children }) => {
     setItems((prev) => [...prev, { id: prev[prev.length - 1].id + 1, name, type, price, quantity, src: buffer }]);
   };
   
+  const removeItemGivenID = async (id) => {
+    setItems(prev => prev.filter(item => item.id !== id));
+  };
+  
   return (
-    <ItemsContext.Provider value={ {items,addItem} }>
+    <ItemsContext.Provider value={ {items,addItem,removeItemGivenID} }>
       {children}
     </ItemsContext.Provider>
   );

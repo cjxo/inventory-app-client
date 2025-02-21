@@ -233,16 +233,29 @@ footer {
     .itemInfo {
       background: red;
       padding: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
       color: var(--green-colour1);
       border-bottom-left-radius: 8px;
       border-bottom-right-radius: 8px;
-      .quantityAndPrice {
+      display: flex;
+      
+      .left {
         display: flex;
-        justify-content: space-between;
-      } 
+        flex-direction: column;
+        gap: 8px;
+        
+        flex-grow: 1;
+      }
+      
+      .right {
+        .removeItem {
+          display: block;
+          width: 24px;
+          img {
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
     }
     
     /* TESTING */
