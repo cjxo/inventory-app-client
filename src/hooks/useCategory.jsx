@@ -5,6 +5,8 @@ import {
   useEffect,
 } from "react";
 
+import api from "../lib/api";
+
 const CategoryContext = createContext({
   categories: [],
   addCategory: async (name, background_colour) => {},
@@ -15,13 +17,12 @@ const CategoryProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   
   useEffect(() => {
-    // api.category.getAll();
-    setCategories([
-      { id: 1, name: "uncategorized", background_colour: "#ffffff", },
-      { id: 2, name: "potion", background_colour: "#777ae6", },
-      { id: 3, name: "food", background_colour: "#e2b86c", },
-      { id: 4, name: "gems", background_colour: "#77e6a1", }
-    ]);
+    api
+      .category
+      .getAll()
+      .then(result => { 
+        setCategories(result.categories);
+      });
   }, []);
   
   const addCategory = async (name, background_colour) => {
