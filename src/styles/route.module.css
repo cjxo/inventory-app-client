@@ -145,4 +145,22 @@ form.form0 {
     align-items: center;
     gap: 16px;
   }
+  
+  .loader {
+    --loader0-radius: 4px;
+    width: 25px;
+  }
 }
+
+.formError {
+  background-color: #ee8782;
+  margin: 0 auto;
+  max-width: 768px;
+  
+  padding: 12px 16px;
+  border-radius: 8px;
+  
+  margin-bottom: 16px;
+  color: white;
+}
+ 

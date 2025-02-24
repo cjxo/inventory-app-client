@@ -1,8 +1,13 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import styles from "../styles/route.module.css";
 import useCategory from "../hooks/useCategory";
+import Loader from "../components/Loader";
 
 const AddCategoryPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  
   const navigate = useNavigate();
   const { addCategory } = useCategory();
   
@@ -11,8 +16,16 @@ const AddCategoryPage = () => {
     const fd = new FormData(e.target);
     const name = fd.get("category-name");
     const categoryColour = fd.get("category-colour");
+    setIsLoading(true);
     addCategory(name, categoryColour)
-      .then(() => navigate("/categories"));
+      .then(result => {
+        setIsLoading(false);
+        if (result.ok) {
+          navigate("/categories");
+        } else {
+          setError(result.message);
+        }
+      });
   };
   
   return (
@@ -21,6 +34,7 @@ const AddCategoryPage = () => {
         <h1 className="title">Add Category</h1>
       </div>
       
+      {error && <p className={styles.formError}>{error}</p>}
       <form className={styles.form0} onSubmit={handleAddCategory}>
         <div className={styles.labelInputPair}>
           <label htmlFor="category-name">Name</label>
@@ -34,7 +48,9 @@ const AddCategoryPage = () => {
           </div>
         </div>
         
-        <button className={`common-link-style ${styles.submit}`}>Submit</button>
+        <button className={`common-link-style ${styles.submit}`}>
+          {isLoading ? <Loader className={styles.loader} /> : "Submit"}
+        </button>
       </form>
     </div>
   );

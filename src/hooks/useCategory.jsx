@@ -8,12 +8,14 @@ import {
 import api from "../lib/api";
 
 const CategoryContext = createContext({
+  isLoading: true,
   categories: [],
   addCategory: async (name, background_colour) => {},
   removeCategoryGivenID: async (id) => {},
 });
 
 const CategoryProvider = ({ children }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   
   useEffect(() => {
@@ -22,19 +24,32 @@ const CategoryProvider = ({ children }) => {
       .getAll()
       .then(result => { 
         setCategories(result.categories);
+        setIsLoading(false);
       });
   }, []);
   
   const addCategory = async (name, background_colour) => {
-    setCategories(prev => [...prev, { id: prev[prev.length - 1].id + 1, name, background_colour }]);
+    const result = await api.category.insert(name, background_colour);
+    if (result.ok) {
+      setCategories(prev => [...prev, result.category]);
+    } else {
+      console.error(result.message);
+    }
+    
+    return result;
   };
   
   const removeCategoryGivenID = async (id) => {
-    setCategories(prev => prev.filter(category => category.id !== id));
+    const result = await api.category.delete(id);
+    if (result.ok) {
+      setCategories(prev => prev.filter(category => category.id !== id));
+    } else {
+      console.error(result.message);
+    }
   };
   
   return (
-    <CategoryContext.Provider value={ {categories,addCategory,removeCategoryGivenID} }>
+    <CategoryContext.Provider value={{isLoading,categories,addCategory,removeCategoryGivenID}}>
       {children}
     </CategoryContext.Provider>
   );
