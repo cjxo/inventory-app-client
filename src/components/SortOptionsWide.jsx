@@ -86,7 +86,7 @@ const SortOptionsWide = ({ onFiltersChanged, defaultFilters }) => {
           {categoryContext.categories.map(category => (
             <div key={category.id} className={styles.inputLabelPair}>
               <input id={category.name} value={category.name} name={category.name} type="checkbox" checked={!!categories[category.name]} onChange={handleCheckboxChange} />
-              <label style={{backgroundColor: category.background_colour}} className="category-label" htmlFor={category.name}>{category.name}</label>
+              <label style={{backgroundColor: category.background_colour, color: category.textColour}} className="category-label" htmlFor={category.name}>{category.name}</label>
             </div>
           ))}
         </form>

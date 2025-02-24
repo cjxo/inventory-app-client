@@ -21,12 +21,6 @@ const CategoryPage = () => {
       ) : (
         <ul className={styles.categoryList}>
           {categories.map(category => {
-            // https://en.wikipedia.org/wiki/Relative_luminance
-            const r = parseInt(category.background_colour.slice(1, 3), 16) / 255;
-            const g = parseInt(category.background_colour.slice(3, 5), 16) / 255;
-            const b = parseInt(category.background_colour.slice(5, 7), 16) / 255;
-            const luminance = 0.2126 * r*r + 0.7152 * g*g + 0.0722 * b*b;
-
             // oh great, i just wasted time doing this! Solution is at https://en.wikipedia.org/wiki/Relative_luminance!
             /*
             const hsv = hexRGBToHSV(category.background_colour);
@@ -36,7 +30,7 @@ const CategoryPage = () => {
             const colour = HSVToHexRGB(hsv);*/
                         
             return <li key={category.id} style={{backgroundColor: category.background_colour}}>
-              <p style={{ color: luminance > 0.5 ? "#000000" : "#FFFFFF" }}>{category.name}</p>
+              <p style={{ color: category.textColour }}>{category.name}</p>
               {(category.id !== 1) && <ButtonImage
                 src="./src/assets/svgrepo/trash-bin-trash-svgrepo-com.svg"
                 alt={`remove ${category.name} category`}

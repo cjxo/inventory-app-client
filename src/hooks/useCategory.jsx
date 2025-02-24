@@ -23,7 +23,17 @@ const CategoryProvider = ({ children }) => {
       .category
       .getAll()
       .then(result => { 
-        setCategories(result.categories);
+        setCategories(result.categories.map(category => {
+          // https://en.wikipedia.org/wiki/Relative_luminance
+          const r = parseInt(category.background_colour.slice(1, 3), 16) / 255;
+          const g = parseInt(category.background_colour.slice(3, 5), 16) / 255;
+          const b = parseInt(category.background_colour.slice(5, 7), 16) / 255;
+          const luminance = 0.2126 * r*r + 0.7152 * g*g + 0.0722 * b*b;
+          return {
+            ...category,
+            textColour: luminance > 0.5 ? "#000000" : "#FFFFFF"
+          };
+        }));
         setIsLoading(false);
       });
   }, []);

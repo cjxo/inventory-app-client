@@ -63,8 +63,9 @@ const ItemListGrid = ({ items, nameSortOrder, priceSortOrder, categories }) => {
 
   return (
     <ul className={styles.itemGrid}>
-      {itemsToRender.map(item => (
-        <li key={item.id} className={styles.itemCard}>
+      {itemsToRender.map(item => {
+        const category = c.categories.find(cat => cat.name === item.type);
+        return <li key={item.id} className={styles.itemCard}>
           <div className={styles.image}>
             <PixelArtCanvas
               src={item.src}
@@ -73,8 +74,8 @@ const ItemListGrid = ({ items, nameSortOrder, priceSortOrder, categories }) => {
               scaleY={scaleY}
             />
           </div>
-          <div className={`${styles.itemInfo}`} style={{background: c.categories.find(cat => cat.name === item.type)?.background_colour}}>
-            <div className={styles.left}>
+          <div className={`${styles.itemInfo}`} style={{background: category?.background_colour}}>
+            <div className={styles.left} style={{color: category?.textColour}}>
               <p>{item.name}</p>
               <p className={styles.quantity}>x{item.quantity}</p> 
               <p>{item.price}</p>
@@ -90,7 +91,7 @@ const ItemListGrid = ({ items, nameSortOrder, priceSortOrder, categories }) => {
             </div>
           </div>
         </li>
-      ))}
+      })}
     </ul>
   );
 }

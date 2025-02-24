@@ -50,7 +50,7 @@ const AddItemPage = () => {
                   defaultChecked={category.id === 1} />
                 <label
                   htmlFor={`item-${category.name}`}
-                  style={{backgroundColor: category.background_colour}}
+                  style={{backgroundColor: category.background_colour, color: category.textColour}}
                   className="category-label"
                 >
                   {category.name}
