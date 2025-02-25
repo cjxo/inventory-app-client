@@ -21,9 +21,10 @@ const AddItemPage = () => {
     const quantity = fd.get("item-quantity");
     const image = fd.get("item-image");
     
+    //console.log(image.webkitRelativePath);
     //const buf = await image.arrayBuffer();
-    addItem(name, type, "$"+price, quantity, URL.createObjectURL(image))
-      .then(() => navigate("/items"));
+    //addItem(name, type, "$"+price, quantity, URL.createObjectURL(image))
+      //.then(() => navigate("/items"));
   };
   
   return (

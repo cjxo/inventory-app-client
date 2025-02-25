@@ -5,11 +5,12 @@ import ButtonImage from "../components/ButtonImage";
 import NarrowSortDropdown from "../components/NarrowSortDropdown";
 import SortOptionsWide from "../components/SortOptionsWide";
 import ItemListGrid from "../components/ItemListGrid";
+import Loader from "../components/Loader";
 import useItems from "../hooks/useItems"; 
 
 const ItemPage = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
-  const { items } = useItems();
+  const { isLoading, items } = useItems();
   
   const [filters, setFilters] = useState({
     nameSortOrder: "none",
@@ -46,13 +47,17 @@ const ItemPage = () => {
         </div>
 
         {openDropDown && <NarrowSortDropdown onFiltersChanged={handleFiltersChange} defaultFilters={filters} />}
-
-        <ItemListGrid
-          items={items}
-          nameSortOrder={filters.nameSortOrder}
-          priceSortOrder={filters.priceSortOrder}
-          categories={filters.categories}
-        />
+  
+        {isLoading ? (
+          <Loader className={styles.loader} />
+        ) : (
+          <ItemListGrid
+            items={items}
+            nameSortOrder={filters.nameSortOrder}
+            priceSortOrder={filters.priceSortOrder}
+            categories={filters.categories}
+          />
+        )}
       </div>
     </div>
   );

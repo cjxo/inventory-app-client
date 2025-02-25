@@ -32,6 +32,13 @@ main {
 
 .itemPage {
   .mainDisplay {
+    .loader {
+      width: 64px;
+      height: 64px;
+      
+      margin: auto;
+    }
+    
     .sortBar {
       display: flex;
       align-items: center;
@@ -126,6 +133,9 @@ form.form0 {
       }
       
       .removeCategory {
+        background-color: #ee8782;
+        border-radius: 8px;
+        padding: 8px;
         img {
           width: 24px;
         }

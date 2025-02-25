@@ -249,7 +249,8 @@ footer {
       .right {
         .removeItem {
           display: block;
-          width: 24px;
+          background-color: #ee8782;
+          border-radius: 8px;
           img {
             width: 24px;
             height: 24px;

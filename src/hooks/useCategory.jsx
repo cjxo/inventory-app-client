@@ -14,6 +14,16 @@ const CategoryContext = createContext({
   removeCategoryGivenID: async (id) => {},
 });
 
+// https://en.wikipedia.org/wiki/Relative_luminance
+const getLuminanceFromHexRGB = (hex) => {
+  const r = parseInt(hex.slice(1, 3), 16) / 255;
+  const g = parseInt(hex.slice(3, 5), 16) / 255;
+  const b = parseInt(hex.slice(5, 7), 16) / 255;
+  const luminance = 0.2126 * r*r + 0.7152 * g*g + 0.0722 * b*b;
+  
+  return luminance;
+};
+
 const CategoryProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
@@ -24,14 +34,9 @@ const CategoryProvider = ({ children }) => {
       .getAll()
       .then(result => { 
         setCategories(result.categories.map(category => {
-          // https://en.wikipedia.org/wiki/Relative_luminance
-          const r = parseInt(category.background_colour.slice(1, 3), 16) / 255;
-          const g = parseInt(category.background_colour.slice(3, 5), 16) / 255;
-          const b = parseInt(category.background_colour.slice(5, 7), 16) / 255;
-          const luminance = 0.2126 * r*r + 0.7152 * g*g + 0.0722 * b*b;
           return {
             ...category,
-            textColour: luminance > 0.5 ? "#000000" : "#FFFFFF"
+            textColour: getLuminanceFromHexRGB(category.background_colour) > 0.5 ? "#000000" : "#FFFFFF",
           };
         }));
         setIsLoading(false);
@@ -41,7 +46,11 @@ const CategoryProvider = ({ children }) => {
   const addCategory = async (name, background_colour) => {
     const result = await api.category.insert(name, background_colour);
     if (result.ok) {
-      setCategories(prev => [...prev, result.category]);
+      const newCategory = {
+        ...result.category,
+        textColour: getLuminanceFromHexRGB(result.category.background_colour) > 0.5 ? "#000000" : "#FFFFFF",
+      };
+      setCategories(prev => [...prev, newCategory]);
     } else {
       console.error(result.message);
     }

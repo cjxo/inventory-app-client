@@ -4,14 +4,14 @@ import PixelArtCanvas from "./PixelArtCanvas";
 import styles from "../styles/component.module.css";
 import useCategory from "../hooks/useCategory";
 import useItems from "../hooks/useItems";
-import ButtonImage from "../components/ButtonImage";
+import ButtonImage from "./ButtonImage";
 
 // so far, from what I understand about testing, pull out functions from
 // components to be "testable" as a unit
 const filterItemsByCategory = (items, categories) => {
   return items.filter(item => {
     if (Object.values(categories).every(value => !value)) return true;
-    return Object.keys(categories).some(category => categories[category] && (item.type === category));
+    return Object.keys(categories).some(category => categories[category] && (item.type_name === category));
   });
 };
 
@@ -58,13 +58,13 @@ const ItemListGrid = ({ items, nameSortOrder, priceSortOrder, categories }) => {
     scaleX = 6;
     scaleY = 6;
   }
-
+  
   const itemsToRender = sortByPrice(sortByName(filterItemsByCategory(items, categories), nameSortOrder), priceSortOrder);
 
   return (
     <ul className={styles.itemGrid}>
       {itemsToRender.map(item => {
-        const category = c.categories.find(cat => cat.name === item.type);
+        const category = c.categories.find(cat => cat.id === item.type);
         return <li key={item.id} className={styles.itemCard}>
           <div className={styles.image}>
             <PixelArtCanvas
@@ -103,7 +103,8 @@ ItemListGrid.propTypes = {
       name: PropTypes.string.isRequired,
       price: PropTypes.string.isRequired,
       quantity: PropTypes.number.isRequired,
-      type: PropTypes.string.isRequired,
+      type: PropTypes.number.isRequired,
+      type_name: PropTypes.string.isRequired,
       src: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,

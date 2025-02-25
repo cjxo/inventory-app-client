@@ -4,7 +4,6 @@ import styles from "../styles/route.module.css";
 import ButtonImage from "../components/ButtonImage";
 import useCategory from "../hooks/useCategory";
 import Loader from "../components/Loader";
-import { hexRGBToHSV,HSVToHexRGB } from "../lib/utils";
 
 const CategoryPage = () => {
   const { isLoading, categories, removeCategoryGivenID } = useCategory();
