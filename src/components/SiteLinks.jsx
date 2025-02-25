@@ -1,6 +1,11 @@
 import { NavLink } from "react-router-dom";
-import styles from "../styles/component.module.css";
+import { useState } from "react";
 import PropTypes from "prop-types";
+
+import useItems from "../hooks/useItems";
+import useCategory from "../hooks/useCategory";
+import api from "../lib/api";
+import styles from "../styles/component.module.css";
 
 const ActiveNavLink = ({ to, name }) => {
   return (
@@ -18,6 +23,18 @@ const ActiveNavLink = ({ to, name }) => {
 };
 
 const SiteLinks = () => {
+  const [isReseting, setIsReseting] = useState(false);
+  
+  const items = useItems();
+  const categories = useCategory();
+  const handleResetState = async () => {
+    setIsReseting(true);
+    await api.reset();
+    await categories.refetch();
+    await items.refetch();
+    setIsReseting(false);
+  };
+
   return (
     <ul className={styles.siteLinks}>
       <li>
@@ -28,6 +45,9 @@ const SiteLinks = () => {
       </li>
       <li>
         <ActiveNavLink to="/categories" name="Categories" />
+      </li>
+      <li>
+        <button onClick={handleResetState} disabled={isReseting} className={styles.resetStateBtn}>Reset State</button>
       </li>
     </ul>
   );

@@ -42,6 +42,7 @@ const fetch2 = async (relResource, method, data) => {
 };
 
 export default {
+  reset: async () => await fetch2("reset/", "POST"),
   category: {
     getAll: async () => await fetch2("categories/", "GET"),
     insert: async (name, background_colour) => await fetch2("categories/", "POST", { name, background_colour }),
@@ -49,5 +50,6 @@ export default {
   },
   items: {
     getAll: async () => await fetch2("items/", "GET"),
+    delete: async (id) => await fetch2(`items/${id}`, "DELETE"),
   },
 };

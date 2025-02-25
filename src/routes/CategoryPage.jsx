@@ -27,10 +27,10 @@ const CategoryPage = () => {
             hsv.saturation = 0;
             hsv.value = ;
             const colour = HSVToHexRGB(hsv);*/
-                        
+            
             return <li key={category.id} style={{backgroundColor: category.background_colour}}>
               <p style={{ color: category.textColour }}>{category.name}</p>
-              {(category.id !== 1) && <ButtonImage
+              {(category.name !== "uncategorized") && <ButtonImage
                 src="./src/assets/svgrepo/trash-bin-trash-svgrepo-com.svg"
                 alt={`remove ${category.name} category`}
                 className={styles.removeCategory}

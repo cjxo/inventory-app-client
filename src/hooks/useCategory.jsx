@@ -12,6 +12,7 @@ const CategoryContext = createContext({
   categories: [],
   addCategory: async (name, background_colour) => {},
   removeCategoryGivenID: async (id) => {},
+  refetch: async () => {},
 });
 
 // https://en.wikipedia.org/wiki/Relative_luminance
@@ -29,19 +30,20 @@ const CategoryProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   
   useEffect(() => {
-    api
-      .category
-      .getAll()
-      .then(result => { 
-        setCategories(result.categories.map(category => {
-          return {
-            ...category,
-            textColour: getLuminanceFromHexRGB(category.background_colour) > 0.5 ? "#000000" : "#FFFFFF",
-          };
-        }));
-        setIsLoading(false);
-      });
+    refetch();
   }, []);
+  
+  const refetch = async () => {
+    setIsLoading(true);
+    const result = await api.category.getAll();
+    setCategories(result.categories.map(category => {
+      return {
+        ...category,
+        textColour: getLuminanceFromHexRGB(category.background_colour) > 0.5 ? "#000000" : "#FFFFFF",
+      };
+    }));
+    setIsLoading(false);
+  };
   
   const addCategory = async (name, background_colour) => {
     const result = await api.category.insert(name, background_colour);
@@ -68,7 +70,7 @@ const CategoryProvider = ({ children }) => {
   };
   
   return (
-    <CategoryContext.Provider value={{isLoading,categories,addCategory,removeCategoryGivenID}}>
+    <CategoryContext.Provider value={{isLoading,categories,addCategory,removeCategoryGivenID,refetch}}>
       {children}
     </CategoryContext.Provider>
   );

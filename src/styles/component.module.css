@@ -61,9 +61,25 @@
   }
 }
 
-.siteLinks {
+.siteLinks {  
   a.active {
     color: var(--green-colour1);
+  }
+  
+  .resetStateBtn {
+    background-color: #ee8782;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    
+    &:disabled {
+      background-color: #a25863;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    display: flex;
+    align-items: center;
   }
 }
 

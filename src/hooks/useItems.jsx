@@ -12,6 +12,7 @@ const ItemsContext = createContext({
   items: [],
   addItem: async (name, type, price, quantity, buffer) => {},
   removeItemGivenID: async (id) => {},
+  refetch: async () => {},
 });
 
 const ItemsProvider = ({ children }) => {
@@ -19,25 +20,31 @@ const ItemsProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
-    api
-      .items
-      .getAll()
-      .then(result => {
-        setItems(result.items);
-        setIsLoading(false);
-      });
+    refetch();
   }, []);
+  
+  const refetch = async () => {
+    setIsLoading(true);
+    const result = await api.items.getAll();
+    setItems(result.items);
+    setIsLoading(false);
+  };
   
   const addItem = async (name, type, price, quantity, buffer) => {
     setItems((prev) => [...prev, { id: prev[prev.length - 1].id + 1, name, type, price, quantity, src: buffer }]);
   };
   
   const removeItemGivenID = async (id) => {
-    setItems(prev => prev.filter(item => item.id !== id));
+    const result = await api.items.delete(id);
+    if (result.ok) {
+      setItems(prev => prev.filter(item => item.id !== id));
+    } else {
+      console.error(result.message);;
+    }
   };
   
   return (
-    <ItemsContext.Provider value={ {isLoading,items,addItem,removeItemGivenID} }>
+    <ItemsContext.Provider value={ {isLoading,items,addItem,removeItemGivenID,refetch} }>
       {children}
     </ItemsContext.Provider>
   );
