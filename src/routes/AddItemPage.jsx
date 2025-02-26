@@ -5,25 +5,39 @@ import styles from "../styles/route.module.css";
 import FileUploader from "../components/FileUploader";
 import useCategory from "../hooks/useCategory";
 import useItems from "../hooks/useItems"; 
+import Loader from "../components/Loader";
 
 const AddItemPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { categories } = useCategory();
   const { addItem } = useItems();
   
   const handleAddItem = async (e) => {
     e.preventDefault();
-    const fd = new FormData(e.target);
-    
+    setIsLoading(true);
+    addItem(new FormData(e.target)).then(result => {
+      setIsLoading(false);
+      if (result.ok) {
+        navigate("/items");
+        setError("");
+      } else {
+        setError(result.message);
+      }
+    });
+    /*
     const name = fd.get("item-name");
     const type = fd.get("item-category");
     const price = fd.get("item-price");
     const quantity = fd.get("item-quantity");
-    const image = fd.get("item-image");
-    
+    const image = fd.get("item-image");*/
+
+    //console.log(image instanceof File);
+    //console.log(JSON.stringify({ image }));
     //console.log(image.webkitRelativePath);
     //const buf = await image.arrayBuffer();
-    //addItem(name, type, "$"+price, quantity, URL.createObjectURL(image))
+    //addItem(name, type, "$"+price, quantity, image)
       //.then(() => navigate("/items"));
   };
   
@@ -32,6 +46,8 @@ const AddItemPage = () => {
       <div className="prologue">
         <h1 className="title">Add Item</h1>
       </div>
+      
+      {error && <p className={styles.formError}>{error}</p>}
       <form className={styles.form0} onSubmit={handleAddItem}>
         <div className={styles.labelInputPair}>
           <label htmlFor="item-name">Name</label>
@@ -73,7 +89,9 @@ const AddItemPage = () => {
         
         <FileUploader />
         
-        <button className={`common-link-style ${styles.submit}`}>Submit</button>
+        <button className={`common-link-style ${styles.submit}`}>
+          {isLoading ? <Loader className={styles.loader} /> : "Submit"}
+        </button>
       </form>
     </div>
   );

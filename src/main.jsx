@@ -16,6 +16,25 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
+/*
+let uint8
+const test = async () => {
+  const response = await fetch("http://localhost:3000/items/test", {
+    mode: "cors",
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  
+  console.log(response);
+  const blob = await response.blob();
+  uint8 = URL.createObjectURL(blob);
+  console.log(blob);
+};
+
+test();
+*/
 const router = createBrowserRouter([
   {
     path: "/",

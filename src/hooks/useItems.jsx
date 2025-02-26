@@ -26,12 +26,29 @@ const ItemsProvider = ({ children }) => {
   const refetch = async () => {
     setIsLoading(true);
     const result = await api.items.getAll();
-    setItems(result.items);
+    if (result.ok) {
+      const blobs = await Promise.all(result.items.map(item => api.items.blob(item.src)));
+      
+      setItems(result.items.map((item, idx) => {
+        //return item;
+        return { ...item, src: URL.createObjectURL(blobs[idx].blob) };
+      }));
+    }
     setIsLoading(false);
   };
   
-  const addItem = async (name, type, price, quantity, buffer) => {
-    setItems((prev) => [...prev, { id: prev[prev.length - 1].id + 1, name, type, price, quantity, src: buffer }]);
+  const addItem = async (formData) => {
+    const result = await api.items.insert(formData);
+    if (result.ok) {
+      const item = result.item;
+      const blob = await api.items.blob(item.src);
+      console.log(blob);
+      setItems((prev) => [...prev, { ...item, src: URL.createObjectURL(blob.blob) }]);
+    } else {
+      console.error(result.message);
+    }
+    
+    return result;
   };
   
   const removeItemGivenID = async (id) => {
