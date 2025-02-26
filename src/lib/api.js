@@ -9,10 +9,11 @@ const getFull = (relResource) => {
 
 const fetchJSON = async (relResource, method, data) => {
   try {
+    
     const response = await fetch(getFull(relResource), {
       method,
-      body: JSON.stringify(data),
-      headers: {
+      body: (data instanceof FormData) ? data : JSON.stringify(data),
+      headers: (data instanceof FormData) ? {} : {
         "Content-Type": "application/json",
       },
       mode: "cors",
@@ -66,37 +67,6 @@ const getBlob = async (relResource) => {
   }
 };
 
-const postMultipartForm = async (relResource, data) => {
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
-  // https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch
-  // https://developer.mozilla.org/en-US/docs/Web/API/RequestInit
-  try {
-    const response = await fetch(getFull(relResource), {
-      method: "POST",
-      body: data,
-      mode: "cors",
-    });
-  
-    // every response from the server should
-    // return a message field in the object
-    const jsonstuff = await response.json();
-    
-    return {
-      ok: response.ok,
-      status: response.status,
-      statusText: response.statusText,
-      ...jsonstuff,
-    };
-  } catch (err) {
-    return {
-      ok: false,
-      message: err.stack,
-      status: 400,
-      statusText: "Bad Request"
-    };
-  }
-};
-
 export default {
   reset: async () => await fetchJSON("reset/", "POST"),
   category: {
@@ -107,7 +77,7 @@ export default {
   items: {
     getAll: async () => await fetchJSON("items/", "GET"),
     delete: async (id) => await fetchJSON(`items/${id}`, "DELETE"),
-    insert: async (formData) => await postMultipartForm("items/", formData),
+    insert: async (formData) => await fetchJSON("items/", "POST", formData),
     blob: async (src) => await getBlob(`items/blob/${src}`),
   },
 };

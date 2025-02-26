@@ -139,6 +139,10 @@ form.form0 {
         img {
           width: 24px;
         }
+        
+        &:disabled {
+          background-color: #a25863;
+        }
       }
     }
   }

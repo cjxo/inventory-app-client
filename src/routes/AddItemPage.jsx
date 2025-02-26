@@ -89,7 +89,7 @@ const AddItemPage = () => {
         
         <FileUploader />
         
-        <button className={`common-link-style ${styles.submit}`}>
+        <button disabled={isLoading} className={`common-link-style ${styles.submit}`}>
           {isLoading ? <Loader className={styles.loader} /> : "Submit"}
         </button>
       </form>

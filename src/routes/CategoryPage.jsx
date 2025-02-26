@@ -7,14 +7,17 @@ import useItems from "../hooks/useItems";
 import Loader from "../components/Loader";
 
 const CategoryPage = () => {
+  const [deletingID, setDeletingID] = useState(null);
   const { isLoading, categories, removeCategoryGivenID, findByName } = useCategory();
   const { changeItemCategoryFromCategoryIDToNewCategory } = useItems();
   
   const uncategorized = findByName("uncategorized");
   
   const handleRemoveCategory = async (id) => {
+    setDeletingID(id);
     await removeCategoryGivenID(id);
     changeItemCategoryFromCategoryIDToNewCategory(id, uncategorized);
+    setDeletingID(null);
   };
   
   return (
@@ -43,6 +46,7 @@ const CategoryPage = () => {
                 src="./src/assets/svgrepo/trash-bin-trash-svgrepo-com.svg"
                 alt={`remove ${category.name} category`}
                 className={styles.removeCategory}
+                disabled={deletingID === category.id}
                 onClick={() => handleRemoveCategory(category.id)}
               />}
             </li>

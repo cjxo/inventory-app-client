@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 
 import PixelArtCanvas from "./PixelArtCanvas";
@@ -47,10 +48,17 @@ const sortByPrice = (items, priceSortOrder) => {
 
 const ItemListGrid = ({ items, nameSortOrder, priceSortOrder, categories }) => {
   const c = useCategory();
+  const [deletingID, setDeletingID] = useState(null);
   const { removeItemGivenID } = useItems();
   //https://stackoverflow.com/questions/1248081/how-to-get-the-browser-viewport-dimensions
   const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
  //const viewportHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+  
+  const handleRemoveItem = async (id) => {
+    setDeletingID(id);
+    await removeItemGivenID(id);
+    setDeletingID(null);
+  };
   
   let scaleX = 8;
   let scaleY = 8;
@@ -86,7 +94,8 @@ const ItemListGrid = ({ items, nameSortOrder, priceSortOrder, categories }) => {
                 src="./src/assets/svgrepo/trash-bin-trash-svgrepo-com.svg"
                 alt={`remove ${item.name}`}
                 className={styles.removeItem}
-                onClick={() => removeItemGivenID(item.id)}
+                disabled={deletingID === item.id}
+                onClick={() => handleRemoveItem(item.id)}
               />
             </div>
           </div>
