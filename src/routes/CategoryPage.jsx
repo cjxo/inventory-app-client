@@ -3,10 +3,19 @@ import { Link } from "react-router-dom";
 import styles from "../styles/route.module.css";
 import ButtonImage from "../components/ButtonImage";
 import useCategory from "../hooks/useCategory";
+import useItems from "../hooks/useItems";
 import Loader from "../components/Loader";
 
 const CategoryPage = () => {
-  const { isLoading, categories, removeCategoryGivenID } = useCategory();
+  const { isLoading, categories, removeCategoryGivenID, findByName } = useCategory();
+  const { changeItemCategoryFromCategoryIDToNewCategory } = useItems();
+  
+  const uncategorized = findByName("uncategorized");
+  
+  const handleRemoveCategory = async (id) => {
+    await removeCategoryGivenID(id);
+    changeItemCategoryFromCategoryIDToNewCategory(id, uncategorized);
+  };
   
   return (
     <div className={styles.categoryPage}>
@@ -34,7 +43,7 @@ const CategoryPage = () => {
                 src="./src/assets/svgrepo/trash-bin-trash-svgrepo-com.svg"
                 alt={`remove ${category.name} category`}
                 className={styles.removeCategory}
-                onClick={() => removeCategoryGivenID(category.id)}
+                onClick={() => handleRemoveCategory(category.id)}
               />}
             </li>
           })}

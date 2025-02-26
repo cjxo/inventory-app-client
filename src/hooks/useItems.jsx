@@ -43,8 +43,18 @@ const ItemsProvider = ({ children }) => {
     }
   };
   
+  const changeItemCategoryFromCategoryIDToNewCategory = (oldCategoryID, newCategory) => {
+    setItems(old => old.map(item => {
+      if (item.type === oldCategoryID) {
+        return { ...item, type: newCategory.id, type_name: newCategory.name };
+      } else {
+        return item;
+      }
+    }));
+  };
+  
   return (
-    <ItemsContext.Provider value={ {isLoading,items,addItem,removeItemGivenID,refetch} }>
+    <ItemsContext.Provider value={ {isLoading,items,addItem,removeItemGivenID,refetch,changeItemCategoryFromCategoryIDToNewCategory} }>
       {children}
     </ItemsContext.Provider>
   );

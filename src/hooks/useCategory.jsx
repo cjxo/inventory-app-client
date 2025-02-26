@@ -13,6 +13,7 @@ const CategoryContext = createContext({
   addCategory: async (name, background_colour) => {},
   removeCategoryGivenID: async (id) => {},
   refetch: async () => {},
+  findByName: (name) => {},
 });
 
 // https://en.wikipedia.org/wiki/Relative_luminance
@@ -45,6 +46,8 @@ const CategoryProvider = ({ children }) => {
     setIsLoading(false);
   };
   
+  const findByName = (name) => categories.find(category => category.name === name);
+  
   const addCategory = async (name, background_colour) => {
     const result = await api.category.insert(name, background_colour);
     if (result.ok) {
@@ -70,7 +73,7 @@ const CategoryProvider = ({ children }) => {
   };
   
   return (
-    <CategoryContext.Provider value={{isLoading,categories,addCategory,removeCategoryGivenID,refetch}}>
+    <CategoryContext.Provider value={{isLoading,categories,addCategory,removeCategoryGivenID,refetch,findByName}}>
       {children}
     </CategoryContext.Provider>
   );
