@@ -3,8 +3,11 @@ import PropTypes from "prop-types";
 import styles from "../styles/component.module.css";
 import ButtonImage from "./ButtonImage";
 import PixelArtCanvas from "./PixelArtCanvas";
+import Loader from "./Loader";
+import useItems from "../hooks/useItems";
 
-const ScrollableItems = ({ items }) => {
+const ScrollableItems = () => {
+  const { isLoading, items } = useItems();
   const [ithChild, setIthChild] = useState(0);
   const containerRef = useRef(null);
   
@@ -68,49 +71,38 @@ const ScrollableItems = ({ items }) => {
         <h2 className="title">Displayed Items</h2>
       </div>
       
-      <div className={styles.slider}>
-        <ButtonImage
-          src="./svgrepo/left-svgrepo-com.svg"
-          alt="scroll left"
-          className={styles.scrollBtn}
-          onClick={() => handleScroll("L")}
-        />
-        
-        <div className={styles.sliderWrapper} ref={containerRef}>
-          {items.map(item => (
-            <div key={item.id} className={styles.sliderCard}>
-              <PixelArtCanvas
-                src={item.src}
-                alt={item.name}
-                scaleX={8}
-                scaleY={8}
-              />
-            </div>
-          ))}
+      {isLoading ? <Loader /> : (
+        <div className={styles.slider}>
+          <ButtonImage
+            src="./svgrepo/left-svgrepo-com.svg"
+            alt="scroll left"
+            className={styles.scrollBtn}
+            onClick={() => handleScroll("L")}
+          />
+          
+          <div className={styles.sliderWrapper} ref={containerRef}>
+            {items.map(item => (
+              <div key={item.id} className={styles.sliderCard}>
+                <PixelArtCanvas
+                  src={item.src}
+                  alt={item.name}
+                  scaleX={8}
+                  scaleY={8}
+                />
+              </div>
+            ))}
+          </div>
+          
+          <ButtonImage
+            src="./svgrepo/right-svgrepo-com.svg"
+            alt="scroll right"
+            className={styles.scrollBtn}
+            onClick={() => handleScroll("R")}
+          />
         </div>
-        
-        <ButtonImage
-          src="./svgrepo/right-svgrepo-com.svg"
-          alt="scroll right"
-          className={styles.scrollBtn}
-          onClick={() => handleScroll("R")}
-        />
-      </div>
+      )}
     </section>
   );
-};
-
-ScrollableItems.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
-      type: PropTypes.string.isRequired,
-      src: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
 };
 
 export default ScrollableItems;

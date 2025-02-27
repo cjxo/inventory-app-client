@@ -2,11 +2,8 @@ import { Link } from "react-router-dom";
 
 import ScrollableItems from "../components/ScrollableItems";
 import styles from "../styles/route.module.css";
-import useItems from "../hooks/useItems";
 
 const HomePage = () => {
-  const { items } = useItems();
-  
   return (
     <div className={styles.homePage}>
       <div className={styles.homePageIntro}>
@@ -19,7 +16,7 @@ const HomePage = () => {
         <Link className="common-link-style" to="/categories">See Categories</Link>
       </div>
 
-      <ScrollableItems items={items} />
+      <ScrollableItems />
     </div>
   );
 };
