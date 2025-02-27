@@ -91,7 +91,7 @@ const ItemListGrid = ({ items, nameSortOrder, priceSortOrder, categories }) => {
             
             <div className={styles.right}>
               <ButtonImage
-                src="./src/assets/svgrepo/trash-bin-trash-svgrepo-com.svg"
+                src="./svgrepo/trash-bin-trash-svgrepo-com.svg"
                 alt={`remove ${item.name}`}
                 className={styles.removeItem}
                 disabled={deletingID === item.id}

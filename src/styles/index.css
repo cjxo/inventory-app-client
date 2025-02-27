@@ -3,12 +3,12 @@
 }
 
 @font-face {
-  src: url("./src/assets/fonts/Exo_2/Exo2-VariableFont_wght.ttf");
+  src: url("./fonts/Exo_2/Exo2-VariableFont_wght.ttf");
   font-family: "exo2";
 }
 
 @font-face {
-  src: url("./src/assets/fonts/Exo_2/Exo2-Italic-VariableFont_wght.ttf");
+  src: url("./fonts/Exo_2/Exo2-Italic-VariableFont_wght.ttf");
   font-family: "exo2it";
 }
 

@@ -18,7 +18,7 @@ const TopBarNarrow = () => {
       <div className={`${styles.wrapper} common-container`}>
         <div className={styles.leftSide}>
           <ButtonImage
-            src="./src/assets/svgrepo/menu-svgrepo-com.svg"
+            src="./svgrepo/menu-svgrepo-com.svg"
             alt="drop down links"
             width={24}
             height={24}
@@ -27,7 +27,7 @@ const TopBarNarrow = () => {
           />
           <Link to="/" className={styles.logo}>
             <PixelArtCanvas
-              src="./src/assets/textures/LootBoxLogo.png"
+              src="./textures/LootBoxLogo.png"
               alt="Loot Box logo"
               scaleX={3}
               scaleY={3}

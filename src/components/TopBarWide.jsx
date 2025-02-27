@@ -12,7 +12,7 @@ const TopBarWide = () => {
         <div className={styles.leftSide}>
           <Link to="/" className={styles.logo}>
             <PixelArtCanvas
-              src="./src/assets/textures/LootBoxLogo.png"
+              src="./textures/LootBoxLogo.png"
               alt="Loot Box logo"
               scaleX={4}
               scaleY={4}

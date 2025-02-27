@@ -43,7 +43,7 @@ const CategoryPage = () => {
             return <li key={category.id} style={{backgroundColor: category.background_colour}}>
               <p style={{ color: category.textColour }}>{category.name}</p>
               {(category.name !== "uncategorized") && <ButtonImage
-                src="./src/assets/svgrepo/trash-bin-trash-svgrepo-com.svg"
+                src="./svgrepo/trash-bin-trash-svgrepo-com.svg"
                 alt={`remove ${category.name} category`}
                 className={styles.removeCategory}
                 disabled={deletingID === category.id}

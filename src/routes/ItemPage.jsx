@@ -35,7 +35,7 @@ const ItemPage = () => {
           <p className={styles.filterP}>Filter</p>
           
           <ButtonImage
-            src="./src/assets/svgrepo/filter-svgrepo-com.svg"
+            src="./svgrepo/filter-svgrepo-com.svg"
             alt="filter"
             width={32}
             height={32}

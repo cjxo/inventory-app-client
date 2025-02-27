@@ -70,7 +70,7 @@ const ScrollableItems = ({ items }) => {
       
       <div className={styles.slider}>
         <ButtonImage
-          src="./src/assets/svgrepo/left-svgrepo-com.svg"
+          src="./svgrepo/left-svgrepo-com.svg"
           alt="scroll left"
           className={styles.scrollBtn}
           onClick={() => handleScroll("L")}
@@ -90,7 +90,7 @@ const ScrollableItems = ({ items }) => {
         </div>
         
         <ButtonImage
-          src="./src/assets/svgrepo/right-svgrepo-com.svg"
+          src="./svgrepo/right-svgrepo-com.svg"
           alt="scroll right"
           className={styles.scrollBtn}
           onClick={() => handleScroll("R")}
