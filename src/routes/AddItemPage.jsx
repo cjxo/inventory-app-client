@@ -79,7 +79,7 @@ const AddItemPage = () => {
         
         <div className={styles.labelInputPair}>
           <label htmlFor="item-price">Price &#40;&#36;&#41;</label>
-          <input type="number" id="item-price" name="item-price" required />
+          <input type="number" id="item-price" step="0.01" name="item-price" required />
         </div>
         
         <div className={styles.labelInputPair}>
