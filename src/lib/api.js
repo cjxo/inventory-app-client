@@ -1,9 +1,9 @@
 const getFull = (relResource) => {
   const mode = import.meta.env.MODE;
   if (mode === "production") {
-    return "/" + relResource;
+    return "/api/" + relResource;
   } else {
-    return "http://localhost:3000/" + relResource;
+    return "http://localhost:3000/api/" + relResource;
   }
 };
 
