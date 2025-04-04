@@ -1,7 +1,8 @@
 # inventory-app-client
 This is the front-end application for the LootBox inventory app. It connects to the
 [inventory-app-server](https://github.com/cjxo/inventory-app-server), which allows users
-to CREATE, READ, and DELETE items and categories in LootBox.
+to CREATE, READ, and DELETE items and categories in LootBox. Please see the [live preview](https://inventory-app-fullstack.onrender.com/).
+Pardon the delay of live preview loading, as I am using the free plan of Render!
 
 # Features
 - Create, Read, and Delete categories interface given its *name* and *background_colour*
